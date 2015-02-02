@@ -1,3 +1,15 @@
+/*===================================
+File name: exerc_3_1.c 
+Date: 2015-01-29
+Group Number: 8
+Member that contributed:
+Johan Nilsson
+Mikeala Lidström
+Henrik Edholm
+Demonstration code: 
+===================================*/
+
+
 #include <stdio.h>
 
 #define MAX 20
