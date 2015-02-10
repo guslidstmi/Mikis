@@ -1,6 +1,6 @@
 /*===================================
 File name: exerc_3_1.c 
-Date: 2015-01-29
+Date: 2015-02-10
 Group Number: 8
 Member that contributed:
 Johan Nilsson
@@ -22,8 +22,21 @@ typedef struct {
 	enum DIRECTION dir;
 } ROBOT;
 
+/*
+/ Function for moving the robots x and y position.
+/ In: Robot pointer.
+*/
 void move(ROBOT *robot);
+
+/*
+/ Function for turning the robot clockwise.
+/ In: Robot pointer.
+*/
 void turn(ROBOT *robot);
+
+/*
+/ Function for clearing stdin.
+*/
 void flushstdin();
 
 int main(void)
@@ -34,14 +47,15 @@ int main(void)
 	char again;
 	while(again != 'n')
 	{
-		robot.dir = N;
-		printf("Enter a move sequence for the robot(t or m): ");
-		scanf("%s", input);
+		robot.dir = N; // Starting direction
 		printf("Enter x starting position for the Robot: ");
 		scanf("%d", &robot.xpos);
 		printf("Enter y starting position for the Robot: ");
 		scanf("%d", &robot.ypos);
+		printf("Enter a move sequence for the robot(t or m): ");
+		scanf("%s", input);
 
+		// Iterates through the move sequence.
 		for(int i = 0; i < sizeof(input); ++i)
 		{
 			if(input[i] == 'm')
@@ -53,7 +67,6 @@ int main(void)
 			{
 				turn(&robot);
 			}
-		
 		}
 		printf("Robot position is: %d,%d and direction is %d\n", 
 		robot.xpos, robot.ypos, robot.dir);	
