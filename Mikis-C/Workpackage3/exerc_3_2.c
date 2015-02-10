@@ -1,6 +1,6 @@
 /*===================================
 File name: exerc_3_2.c 
-Date: 2015-01-29
+Date: 2015-02-10
 Group Number: 8
 Member that contributed:
 Johan Nilsson
@@ -11,14 +11,32 @@ Demonstration code:
 
 #include <stdio.h>
 
+/*
+/ Function which checks if the number exists in the array.
+/ In: int number to be checked, int array, int size of array.
+/ Out: index of the number in the array or -1 if number does not exist.
+*/
 int search_number(int number, int tab[], int size);
+
+/*
+/ Function for sorting the array by finding minimum value and swapping with the first value. 
+/ After swapping the first value, first value changes to be the next element in the array.
+/ In: int number = starting index. int array which is being sorted.
+*/
 void sort(int number, int tab[]);
+
+/*
+/ Function for printing the values in the array.
+/ In: int array to be printed.
+*/
 void printArray(int tab[]);
+
+// premade array.
 int test[] = {1,2,3,34,5,67,3,23,12,13,10};
 
 int main(void)
 {
-	int number = 34;
+	int number = 34; // number to be looked for.
 	int index = -1;
 
 	if((index = search_number(number, test, (int) sizeof(test)/sizeof(test[0]))) == -1)
@@ -36,7 +54,8 @@ int main(void)
 
 int search_number(int number, int tab[], int size)
 {
-	for(int i = 0; i < size; ++i)
+	int i;
+	for(i = 0; i < size; ++i)
 	{
 		if(number == tab[i])
 			return i;
@@ -47,11 +66,12 @@ int search_number(int number, int tab[], int size)
 
 void sort(int number, int tab[])
 {
-	for(int i = number; i < (int) sizeof(test)/sizeof(test[0]); ++i)
+	int i, j;
+	for(i = number; i < (int) sizeof(test)/sizeof(test[0]); ++i)
 	{
 		int smallest = tab[number];
 		int index = 0;
-		for(int j = number; j < (int) sizeof(test)/sizeof(test[0]); ++j)
+		for(j = number; j < (int) sizeof(test)/sizeof(test[0]); ++j)
 		{
 			if(tab[j] < smallest)
 			{
@@ -69,7 +89,8 @@ void sort(int number, int tab[])
 
 void printArray(int tab[])
 {
-	for(int i = 0; i < (int) sizeof(test)/sizeof(test[0]); ++i)
+	int i;
+	for(i = 0; i < (int) sizeof(test)/sizeof(test[0]); ++i)
 	{
 		printf("%d ", tab[i]);
 	}
