@@ -9,12 +9,15 @@ int main(void)
 	out = 1;
 	while(in & 0x80)
 	{
+		int i;
 		REG8(PORTOUT) = out;
 		if(out & 0x80)
 			out = 1;
 		else
 			out = out << 1;
 		in = REG8(PORTIN);
+		for(i = 0; i < 100; i++)
+			;
 	}
 	return 0;
 }
