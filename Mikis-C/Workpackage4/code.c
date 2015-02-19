@@ -1,6 +1,25 @@
+/*===================================
+File name: code.c
+Date: 2015-02-15
+Group Number: 8
+Member that contributed:
+Johan Nilsson
+Mikeala Lidström
+Henrik Edholm
+Demonstration code: 
+===================================*/
+
 #include <stdio.h>
 #include <string.h>
 
+/*
+* if argument is not 6, length of argument is bigger than 1 
+* and if the arguments are not within a certain range of numbers. return error.
+* bitswitch first number, convert to int, to the right position, take second number, 
+* convert to int, and switch it to right position
+* perfom "bit-or" to merge them. repeat.
+* IN: 6 numbers. OUT: 0
+*/
 int main(int argc, char *argv[])
 {
 	if(argc != 6)

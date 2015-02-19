@@ -1,7 +1,19 @@
+/*===================================
+File name: decode.c
+Date: 2015-02-15
+Group Number: 8
+Member that contributed:
+Johan Nilsson
+Mikeala Lidström
+Henrik Edholm
+Demonstration code: 
+===================================*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
+// structure for 8 bit struct
 typedef struct {
 	unsigned char brake2 : 1;
 	unsigned char brake1 : 1;
@@ -11,9 +23,18 @@ typedef struct {
 
 } BYTE;
 
+/*
+* if argument is not 2, length of argument is bigger than 2 
+* and if the argument is bigger than hexdec CB, return error.
+* convert argument to long.
+* Assign first bit in input to brake2, bitswitch assigned position.
+* Repeat for the rest of the input.
+* IN: hexdecimal. OUT: 0
+*/
 int main(int argc, char *argv[])
-{
-	if(argc != 2 || strlen(argv[1]) > 2)
+{	
+	// checks if 2 arguments, 
+	if(argc != 2 || strlen(argv[1]) > 2 || strtol(argv[1], NULL, 16) > 203)
 	{
 		printf("error\n");
 		return 1;
