@@ -14,19 +14,13 @@ Enemy::Enemy(float x, float y, int id, int row) :
 	m_enemy.setFillColor(sf::Color::Blue);
 	m_enemy.setPosition(x, y);
 	m_enemy.setOrigin(60.f / 2.f, 20.f / 2.f);
-	if (row == 1)
-	{
-		m_direction = 1;
-	}
-	else
-	m_direction = 2;
 	m_id = id;
 	m_row = row;
 	m_lives = 3;
 	m_destroyed = false;
 }
 
-bool Enemy::update() 
+bool Enemy::update(int num)
 {
 	if (isBottom())
 	{
@@ -38,25 +32,70 @@ bool Enemy::update()
 		return true;
 	}
 
-	if(m_direction == 0)
+	switch (m_row)
 	{
-		velocity.y = +20.f;
-		velocity.x = 0;
-		m_enemy.move(velocity);
-		m_direction = 1;
-	}
-	else if(m_direction == 1)
-	{
-		velocity.x = +20.f;
-		velocity.y = 0;
-		m_enemy.move(velocity);
-		m_direction = 2;
-	}
-	else {
-		velocity.x = -20.f;
-		velocity.y = 0;
-		m_enemy.move(velocity);
-		m_direction = 0;
+	case 0 :
+		
+		switch (num)
+		{
+		case 0 :
+			velocity.y = +20.f;
+			velocity.x = 0;
+			m_enemy.move(velocity);
+			break;
+		case 1 :
+			velocity.y = 0;
+			velocity.x = +15.f;
+			m_enemy.move(velocity);
+			break;
+		case 2 :
+			velocity.y = 0;
+			velocity.x = -15.f;
+			m_enemy.move(velocity);
+			break;
+		case 3 :
+			velocity.y = 0;
+			velocity.x = -15.f;
+			m_enemy.move(velocity);
+			break;
+		case 4 :
+			velocity.y = 0;
+			velocity.x = +15.f;
+			m_enemy.move(velocity);
+			break;
+		}
+		break;
+	case 1 :
+
+		switch (num)
+		{
+		case 0:
+			velocity.y = +20.f;
+			velocity.x = 0;
+			m_enemy.move(velocity);
+			break;
+		case 1:
+			velocity.y = 0;
+			velocity.x = -15.f;
+			m_enemy.move(velocity);
+			break;
+		case 2:
+			velocity.y = 0;
+			velocity.x = +15.f;
+			m_enemy.move(velocity);
+			break;
+		case 3:
+			velocity.y = 0;
+			velocity.x = +15.f;
+			m_enemy.move(velocity);
+			break;
+		case 4:
+			velocity.y = 0;
+			velocity.x = -15.f;
+			m_enemy.move(velocity);
+			break;
+		}
+		break;
 	}
 	return false;
 }

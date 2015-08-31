@@ -29,6 +29,7 @@ private:
 	bool gameOver;
 	int timer = 0;
 	int enemytimer = 0;
+	int movetimer = 0;
 
 	
 };

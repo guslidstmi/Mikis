@@ -10,7 +10,7 @@ class Enemy
 public:
 	sf::RectangleShape m_enemy;
 	Enemy(float x, float y, int id, int row);
-	bool update();
+	bool update(int num);
 	bool isDestroyed();
 	bool isBottom();
 	void setDestroyed();
@@ -27,7 +27,6 @@ public:
 
 private:
 	sf::Vector2f velocity;
-	int m_direction;
 	int m_lives;
 	int m_id;
 	int m_row;

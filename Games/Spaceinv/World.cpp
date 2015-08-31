@@ -79,8 +79,7 @@ void World::spawnEnemies()
 	for(x = 35, y = 20, i = 0; i < 5; ++i)
 	{
 		for(x = 35, z = 0; z < 9; ++z)
-		{
-			
+		{		
 			Enemy enemy(x, y, id, i % 2);
 			m_enemies.push_back(enemy);
 			x += x_enemy;
@@ -88,7 +87,6 @@ void World::spawnEnemies()
 		}
 		y += y_enemy;
 	}
-
 }
 
 void World::deleteEnemies() 
@@ -102,10 +100,17 @@ void World::drawEnemies(Interface& window)
 	{
 		if(enemytimer % 40 == 0)
 		{
-			gameOver = x.update();
+			gameOver = x.update(movetimer);
 		}
 		window.mWindow.draw(x.m_enemy);
 	}
+	if (enemytimer % 40 == 0)
+	{
+		if (movetimer == 4)
+			movetimer = 0;
+		else ++movetimer;
+	}
+	
 	deleteEnemies();
 }
 
@@ -120,7 +125,7 @@ void World::checkCollision()
 				if(enemy.isDead() == 1)
 				{
 					enemy.setDestroyed();
-					if (enemy.getId() > 9)
+					if (enemy.getId() > 8)
 					m_enemies[enemy.getId() - 9].setBottom();
 					bullet.setCollided();
 				}
