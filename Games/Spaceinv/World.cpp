@@ -39,24 +39,27 @@ void World::update(Interface& window)
 	
 }
 
-void World::spawnBullet() {
+void World::spawnBullet() 
+{
 
 	Bullet bullet(m_player.paddle.getPosition().x, m_player.paddle.getPosition().y);
 	m_bullets.push_back(bullet);
 
 }
 
-void World::drawBullets(Interface& window) {
+void World::drawBullets(Interface& window) 
+{
 
-	for(std::vector<Bullet>::iterator it = m_bullets.begin(); it != m_bullets.end(); ++it)
+	for (auto& x : m_bullets)
 	{
-		it->update();
-		window.mWindow.draw(it->m_bulletRect);
+		x.update();
+		window.mWindow.draw(x.m_bulletRect);
 	}
 	deleteBullets();
 }
 
-bool hasCollided(Bullet& b) {
+bool hasCollided(Bullet& b) 
+{
 	return b.hasCollided();
 }
 
@@ -65,11 +68,13 @@ bool isDestroyed(Enemy& e)
 	return e.isDestroyed();
 }
 
-void World::deleteBullets() {
+void World::deleteBullets() 
+{
 	m_bullets.erase(std::remove_if(std::begin(m_bullets), std::end(m_bullets), hasCollided), std::end(m_bullets));
 }
 
-void World::spawnEnemies() {
+void World::spawnEnemies() 
+{
 	int x, y, i, z;
 	for(x = 35, y = 20, i = 0; i < 5; ++i)
 	{
@@ -85,39 +90,44 @@ void World::spawnEnemies() {
 
 }
 
-void World::deleteEnemies() {
+void World::deleteEnemies() 
+{
 	m_enemies.erase(std::remove_if(std::begin(m_enemies), std::end(m_enemies), isDestroyed), std::end(m_enemies));
 }
 
-void World::drawEnemies(Interface& window) {
-	for(std::vector<Enemy>::iterator it = m_enemies.begin(); it != m_enemies.end(); ++it)
+void World::drawEnemies(Interface& window) 
+{
+	for(auto& x : m_enemies)
 	{
 		if(enemytimer % 40 == 0)
 		{
-			gameOver = it->update();
+			gameOver = x.update();
 		}
-		
-		window.mWindow.draw(it->m_enemy);
-		deleteEnemies();
+
+		window.mWindow.draw(x.m_enemy);
 	}
+	deleteEnemies();
 
 }
 
-void World::checkCollision() {
+void World::checkCollision() 
+{
 
-	for(std::vector<Bullet>::iterator b_it = m_bullets.begin(); b_it != m_bullets.end(); ++b_it)
+	for(auto& bullet : m_bullets)
 	{
-		for(std::vector<Enemy>::iterator e_it = m_enemies.begin(); e_it != m_enemies.end(); ++e_it)
+		for(auto& enemy : m_enemies)
 		{
-			if(b_it->top() <= e_it->bottom() && b_it->left() <= e_it->right() && b_it->right() >= e_it->left()) {
-				if(e_it->isDead() == 1)
+			if(bullet.top() <= enemy.bottom() && bullet.left() <= enemy.right() && bullet.right() >= enemy.left()) 
+			{
+				if(enemy.isDead() == 1)
 				{
-					e_it->setDestroyed();
-					b_it->setCollided();
+					enemy.setDestroyed();
+					bullet.setCollided();
 				}
-				else {
-					e_it->setLives();
-					b_it->setCollided();
+				else 
+				{
+					enemy.setLives();
+					bullet.setCollided();
 				}
 			//	return;
 			}
