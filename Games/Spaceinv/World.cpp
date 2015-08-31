@@ -126,7 +126,16 @@ void World::checkCollision()
 				{
 					enemy.setDestroyed();
 					if (enemy.getId() > 8)
-					m_enemies[enemy.getId() - 9].setBottom();
+					{
+						for (int i = 0; i < m_enemies.size(); ++i)
+						{
+							if (m_enemies[i].getId() == (enemy.getId() - 9))
+							{
+								m_enemies[i].setBottom();
+								break;
+							}
+						}
+					}
 					bullet.setCollided();
 				}
 				else 
