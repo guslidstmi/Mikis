@@ -102,6 +102,7 @@ void World::drawEnemies(Interface& window)
 		{
 			gameOver = x.update(movetimer);
 		}
+		if (!x.isDestroyed())
 		window.mWindow.draw(x.m_enemy);
 	}
 	if (enemytimer % 40 == 0)
@@ -110,41 +111,57 @@ void World::drawEnemies(Interface& window)
 			movetimer = 0;
 		else ++movetimer;
 	}
-	
-	deleteEnemies();
+
 }
 
 void World::checkCollision() 
 {
 	for(auto& bullet : m_bullets)
 	{
-		for(auto& enemy : m_enemies)
+		for (auto& enemy : m_enemies)
 		{
-			if(bullet.top() <= enemy.bottom() && bullet.left() <= enemy.right() && bullet.right() >= enemy.left()) 
+			if (!enemy.isDestroyed())
 			{
-				if(enemy.isDead() == 1)
+				// Check if bullet and enemy has collided, i.e. their x and y position intersect.
+				if (bullet.top() <= enemy.bottom() && bullet.left() <= enemy.right() && bullet.right() >= enemy.left())
 				{
-					enemy.setDestroyed();
-					if (enemy.getId() > 8)
+					// check if enemy only has one life left, then it's destroyed
+					if (enemy.isDead() == 1)
 					{
-						for (int i = 0; i < m_enemies.size(); ++i)
+						enemy.setDestroyed();
+						if (enemy.getId() > 8)
 						{
-							if (m_enemies[i].getId() == (enemy.getId() - 9))
-							{
-								m_enemies[i].setBottom();
-								break;
-							}
+							// determine which enemy is now at the bottom of the column.
+							determineBottom(enemy.getId());
 						}
+						bullet.setCollided();
 					}
-					bullet.setCollided();
+					// if not destroyed, remove one life.
+					else
+					{
+						enemy.setLives();
+						bullet.setCollided();
+					}
+					//	return;
 				}
-				else 
-				{
-					enemy.setLives();
-					bullet.setCollided();
-				}
-			//	return;
 			}
 		}
 	}
+}
+
+void World::determineBottom(int id)
+{
+	if (id < 26 && !m_enemies[id + 9].isDestroyed() && !m_enemies[id + 18].isDestroyed())
+	{
+		m_enemies[id + 9].setBottom();
+	}
+	else if (!m_enemies[id - 9].isDestroyed())
+	{
+		m_enemies[id - 9].setBottom();
+	}
+	else if (id > 18 && !m_enemies[id - 18].isDestroyed())
+	{
+		m_enemies[id - 18].setBottom();
+	}
+		
 }

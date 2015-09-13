@@ -17,9 +17,10 @@ public:
 	void spawnEnemies();
 	void drawBullets(Interface& window);
 	void drawEnemies(Interface& window);
-	void checkCollision();
 	void deleteBullets();
 	void deleteEnemies();
+	void checkCollision();
+	void determineBottom(int id);
 
 
 private:
