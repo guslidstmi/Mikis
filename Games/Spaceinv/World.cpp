@@ -3,16 +3,13 @@
 #include <vector>
 #include "World.h"
 
-#define x_enemy 90
-#define y_enemy 40
-
 class Bullet;
 class Player;
-class Enemy;
+class Enemies;
 
 World::World() : m_player{}, m_bullets{}, m_enemies{}
 {
-	spawnEnemies();
+	Enemies enem();
 	gameOver = false;
 }
 
@@ -63,40 +60,14 @@ bool hasCollided(Bullet& b)
 	return b.hasCollided();
 }
 
-bool isDestroyed(Enemy& e)
-{
-	return e.isDestroyed();
-}
-
 void World::deleteBullets() 
 {
 	m_bullets.erase(std::remove_if(std::begin(m_bullets), std::end(m_bullets), hasCollided), std::end(m_bullets));
 }
 
-void World::spawnEnemies() 
-{
-	int x, y, i, z, id = 0;
-	for(x = 35, y = 20, i = 0; i < 5; ++i)
-	{
-		for(x = 35, z = 0; z < 9; ++z)
-		{		
-			Enemy enemy(x, y, id, i % 2);
-			m_enemies.push_back(enemy);
-			x += x_enemy;
-			++id;
-		}
-		y += y_enemy;
-	}
-}
-
-void World::deleteEnemies() 
-{
-	m_enemies.erase(std::remove_if(std::begin(m_enemies), std::end(m_enemies), isDestroyed), std::end(m_enemies));
-}
-
 void World::drawEnemies(Interface& window) 
 {
-	for(auto& x : m_enemies)
+	for (auto& x : enem.getEnemies())
 	{
 		if(enemytimer % 40 == 0)
 		{
@@ -118,7 +89,7 @@ void World::checkCollision()
 {
 	for(auto& bullet : m_bullets)
 	{
-		for (auto& enemy : m_enemies)
+		for (auto& enemy : enem.getEnemies())
 		{
 			if (!enemy.isDestroyed())
 			{
@@ -126,14 +97,10 @@ void World::checkCollision()
 				if (bullet.top() <= enemy.bottom() && bullet.left() <= enemy.right() && bullet.right() >= enemy.left())
 				{
 					// check if enemy only has one life left, then it's destroyed
-					if (enemy.isDead() == 1)
+ 					if (enemy.isDead() == 1)
 					{
 						enemy.setDestroyed();
-						if (enemy.getId() > 8)
-						{
-							// determine which enemy is now at the bottom of the column.
-							determineBottom(enemy.getId());
-						}
+						enem.determBottom();
 						bullet.setCollided();
 					}
 					// if not destroyed, remove one life.
@@ -147,21 +114,4 @@ void World::checkCollision()
 			}
 		}
 	}
-}
-
-void World::determineBottom(int id)
-{
-	if (id < 26 && !m_enemies[id + 9].isDestroyed() && !m_enemies[id + 18].isDestroyed())
-	{
-		m_enemies[id + 9].setBottom();
-	}
-	else if (!m_enemies[id - 9].isDestroyed())
-	{
-		m_enemies[id - 9].setBottom();
-	}
-	else if (id > 18 && !m_enemies[id - 18].isDestroyed())
-	{
-		m_enemies[id - 18].setBottom();
-	}
-		
 }

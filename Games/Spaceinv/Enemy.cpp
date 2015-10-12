@@ -1,23 +1,21 @@
 #include "Enemy.h"
 
-Enemy::Enemy(float x, float y, int id, int row) : 
+Enemy::Enemy(float x, float y, int id, int row, int col) : 
 	m_enemy{}
 
 {
 	m_enemy.setSize({60.f, 20.f});
-	if (id > 35)
-	{
-		setBottom();
-		m_enemy.setFillColor(sf::Color::Red);
-	}
-	else
 	m_enemy.setFillColor(sf::Color::Blue);
 	m_enemy.setPosition(x, y);
 	m_enemy.setOrigin(60.f / 2.f, 20.f / 2.f);
 	m_id = id;
 	m_row = row;
+	m_col = col;
 	m_lives = 3;
 	m_destroyed = false;
+	m_previous = nullptr;
+	m_next = nullptr;
+
 }
 
 bool Enemy::update(int num)
@@ -134,6 +132,23 @@ int Enemy::isDead()
 void Enemy::setLives() 
 {
 	--m_lives;
+}
+
+void Enemy::setNext(Enemy* enemy)
+{
+	m_next = enemy;
+}
+void Enemy::setPrev(Enemy* enemy)
+{
+	m_previous = enemy;
+}
+Enemy* Enemy::getNext()
+{
+	return m_next;
+}
+Enemy* Enemy::getPrev()
+{
+	return m_previous;
 }
 
 float Enemy::x()		{ return m_enemy.getPosition().x; }

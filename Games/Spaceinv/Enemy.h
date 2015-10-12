@@ -9,7 +9,7 @@ class Enemy
 {
 public:
 	sf::RectangleShape m_enemy;
-	Enemy(float x, float y, int id, int row);
+	Enemy(float x, float y, int id, int row, int col);
 	bool update(int num);
 	bool isDestroyed();
 	bool isBottom();
@@ -23,6 +23,10 @@ public:
 	float x();
 	float y();
 	float bottom();
+	void setNext(Enemy* enemy);
+	void setPrev(Enemy* enemy);
+	Enemy* getNext();
+	Enemy* getPrev();
 
 
 private:
@@ -30,8 +34,11 @@ private:
 	int m_lives;
 	int m_id;
 	int m_row;
+	int m_col;
 	bool m_destroyed;
 	bool m_bottom = false;
+	Enemy* m_previous;
+	Enemy* m_next;
 
 	
 };
