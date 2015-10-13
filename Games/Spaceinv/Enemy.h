@@ -35,10 +35,7 @@ private:
 	int m_col;
 	bool m_destroyed;
 	bool m_bottom = false;
-
-	Enemy* m_previous;
-	Enemy* m_next;
-
+	
 };
 
 #endif // ENEMY_H_

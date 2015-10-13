@@ -21,6 +21,8 @@ void World::update(Interface& window)
 	}
 	++timer;
 	++enemytimer;
+	++bombtimer;
+	++bombtimer2;
 	window.mWindow.draw(m_player.paddle);
 	drawEnemies(window);
 
@@ -31,8 +33,14 @@ void World::update(Interface& window)
 		timer = 0;
 		spawnBullet();	
 	}
+	if (bombtimer > 50)
+	{
+		enem.dropBomb();
+		bombtimer = 0;
+	}
 	checkCollision();
 	drawBullets(window);
+	drawBombs(window);
 	
 }
 
@@ -55,6 +63,24 @@ void World::drawBullets(Interface& window)
 	deleteBullets();
 }
 
+void World::drawBombs(Interface& window)
+{
+	if (bombtimer2 > 1)
+	{
+		for (auto& bomb : enem.getBombs())
+		{
+			bomb.update();
+			window.mWindow.draw(bomb.m_bombCircle);
+		}
+		bombtimer2 = 0;
+	}
+
+	for (auto& bomb : enem.getBombs())
+	{
+		window.mWindow.draw(bomb.m_bombCircle);
+	}
+}
+
 bool hasCollided(Bullet& b) 
 {
 	return b.hasCollided();
@@ -63,6 +89,17 @@ bool hasCollided(Bullet& b)
 void World::deleteBullets() 
 {
 	m_bullets.erase(std::remove_if(std::begin(m_bullets), std::end(m_bullets), hasCollided), std::end(m_bullets));
+}
+
+bool bombHasCollided(Bomb& b)
+{
+	return b.hasCollided();
+}
+
+void World::deleteBombs()
+{
+	std::vector<Bomb> bombs = enem.getBombs();
+	bombs.erase(std::remove_if(std::begin(bombs), std::end(bombs), bombHasCollided), std::end(bombs));
 }
 
 void World::drawEnemies(Interface& window) 

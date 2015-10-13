@@ -16,7 +16,9 @@ public:
 	void spawnBullet();
 	void drawBullets(Interface& window);
 	void drawEnemies(Interface& window);
+	void drawBombs(Interface& window);
 	void deleteBullets();
+	void deleteBombs();
 	void checkCollision();
 	void determineBottom(int id);
 
@@ -30,6 +32,8 @@ private:
 	int timer = 0;
 	int enemytimer = 0;
 	int movetimer = 0;
+	int bombtimer = 0;
+	int bombtimer2 = 0;
 
 	
 };

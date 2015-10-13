@@ -13,8 +13,6 @@ Enemy::Enemy(float x, float y, int id, int row, int col) :
 	m_col = col;
 	m_lives = 3;
 	m_destroyed = false;
-	m_previous = nullptr;
-	m_next = nullptr;
 
 }
 
@@ -25,7 +23,7 @@ bool Enemy::update(int num)
 		m_enemy.setFillColor(sf::Color::Red);
 	}
 
-	if(m_enemy.getPosition().y > 525)
+	if(m_enemy.getPosition().y > 525.f && isDestroyed())
 	{
 		return true;
 	}

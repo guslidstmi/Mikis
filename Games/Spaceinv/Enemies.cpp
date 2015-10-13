@@ -1,11 +1,12 @@
 #include "Enemies.h"
 #include <iostream>
+#include <stdlib.h>
 
 #define x_enemy 90
 #define y_enemy 40
 
 Enemies::Enemies() : 
-	m_enemies{}, m_bums{}
+	m_enemies{}, m_bums{}, m_bombs{}
 {
 	spawnEnemies();
 }
@@ -23,7 +24,7 @@ void Enemies::spawnEnemies()
 			if (id % 5 == 0)
 			{
 				enemy.setBottom();
-				m_bums.push_back(id);
+				m_bums.push_back(id -1);
 			}
 
 			m_enemies.push_back(enemy);
@@ -40,6 +41,11 @@ std::vector<Enemy>& Enemies::getEnemies()
 	return m_enemies;
 }
 
+std::vector<Bomb>& Enemies::getBombs()
+{
+	return m_bombs;
+}
+
 void Enemies::determBottom(int id)
 {
 	while (id % 5 != 0)
@@ -53,8 +59,19 @@ void Enemies::determBottom(int id)
 		{
 			m_enemies[i].setBottom();
 			m_bums[m_enemies[i].getCol() - 1] = m_enemies[i].getId();
-
 			return;
 		}
 	}
+}
+
+void Enemies::dropBomb()
+{
+	srand(time(NULL));
+ 	int randNum = rand() % 8;
+
+	std::cout << "number " << randNum << std::endl;
+	Bomb bomb(m_enemies[m_bums[randNum]].x(), m_enemies[m_bums[randNum]].y());
+
+	m_bombs.push_back(bomb);
+
 }

@@ -9,7 +9,7 @@ int main()
 	while (interface.mWindow.isOpen())
 	{
 		interface.mWindow.clear(sf::Color::Black);
-		//interface.mWindow.draw(interface.mWindow.background);
+		//interface.mWindow.draw(interface.background);
 
 		sf::Event event;
 		while (interface.mWindow.pollEvent(event))
