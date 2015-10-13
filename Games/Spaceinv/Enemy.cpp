@@ -134,22 +134,6 @@ void Enemy::setLives()
 	--m_lives;
 }
 
-void Enemy::setNext(Enemy* enemy)
-{
-	m_next = enemy;
-}
-void Enemy::setPrev(Enemy* enemy)
-{
-	m_previous = enemy;
-}
-Enemy* Enemy::getNext()
-{
-	return m_next;
-}
-Enemy* Enemy::getPrev()
-{
-	return m_previous;
-}
 
 float Enemy::x()		{ return m_enemy.getPosition().x; }
 float Enemy::y()		{ return m_enemy.getPosition().y; }

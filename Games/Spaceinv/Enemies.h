@@ -11,10 +11,11 @@ public:
 	Enemies();
 	std::vector<Enemy>& getEnemies();
 	void dropBomb();
-	void determBottom();
+	void determBottom(int id);
 
 private:
 	std::vector<Enemy> m_enemies;
+	std::vector<int> m_bums;
 	void spawnEnemies();
 
 };

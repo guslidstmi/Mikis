@@ -9,7 +9,7 @@ class Enemies;
 
 World::World() : m_player{}, m_bullets{}, m_enemies{}
 {
-	Enemies enem();
+	Enemies enem{};
 	gameOver = false;
 }
 
@@ -100,7 +100,7 @@ void World::checkCollision()
  					if (enemy.isDead() == 1)
 					{
 						enemy.setDestroyed();
-						enem.determBottom();
+ 						enem.determBottom(enemy.getId());
 						bullet.setCollided();
 					}
 					// if not destroyed, remove one life.
