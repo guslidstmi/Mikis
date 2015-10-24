@@ -4,6 +4,8 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <iostream>
 
 namespace {
 
@@ -16,7 +18,7 @@ public:
 	Interface();
 	sf::RenderWindow mWindow;
 	sf::Texture background;
-
+	sf::Sprite backgroundSprite;
 private:
 	
 };
