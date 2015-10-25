@@ -18,14 +18,14 @@ Enemy::Enemy(float x, float y, int id, int row, int col) :
 
 bool Enemy::update(int num)
 {
+	if (m_enemy.getPosition().y > 525.f && !isDestroyed())
+	{
+		return true;
+	}
+	
 	if (isBottom())
 	{
 		m_enemy.setFillColor(sf::Color::Red);
-	}
-
-	if(m_enemy.getPosition().y > 525.f && isDestroyed())
-	{
-		return true;
 	}
 
 	switch (m_row)

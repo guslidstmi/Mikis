@@ -151,4 +151,18 @@ void World::checkCollision()
 			}
 		}
 	}
+
+	paddleBox = m_player.paddle.getGlobalBounds();
+
+	for (auto& bomb : enem.getBombs())
+	{
+		bombBox = bomb.m_bombCircle.getGlobalBounds();
+		if (paddleBox.intersects(bombBox))
+		{
+			bomb.setCollided();
+			std::cout << "you got hit" << std::endl;
+		}
+	}
+
+	deleteBombs();
 }

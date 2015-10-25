@@ -11,13 +11,14 @@ public:
 	Player();
 	void update();
 	sf::RectangleShape paddle;
-
-private:
-	sf::Vector2f velocity;
 	float y();
 	float x();
 	float left();
 	float right();
+
+private:
+	sf::Vector2f velocity;
+	
 	
 };
 

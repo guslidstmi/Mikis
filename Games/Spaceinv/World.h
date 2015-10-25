@@ -34,6 +34,8 @@ private:
 	int movetimer = 0;
 	int bombtimer = 0;
 	int bombtimer2 = 0;
+	sf::FloatRect paddleBox;
+	sf::FloatRect bombBox;
 
 	
 };
