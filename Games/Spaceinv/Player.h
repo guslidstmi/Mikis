@@ -3,7 +3,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
+#include "Hearts.h"
 
 class Player
 {
@@ -17,10 +17,13 @@ public:
 	float right();
 	int getLives();
 	void reduceLives();
+	void popHearts();
+	std::vector<Hearts>& getHearts();
 
 private:
 	sf::Vector2f velocity;
 	int m_lives;
+	std::vector<Hearts> m_hearts;
 };
 
 #endif // PLAYER_H_

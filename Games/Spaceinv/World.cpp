@@ -9,6 +9,7 @@ class Enemies;
 
 World::World() : m_player{}, m_bullets{}, m_enemies{}
 {
+	
 	Enemies enem{};
 	gameOver = false;
 }
@@ -24,6 +25,11 @@ void World::update(Interface& window)
 	++bombtimer;
 	++bombtimer2;
 	window.mWindow.draw(m_player.paddle);
+	for (auto& heart : m_player.getHearts())
+	{
+		heart.update();
+		window.mWindow.draw(heart.m_heart);
+	}
 	drawEnemies(window);
 
 	gameOver = m_player.update();
@@ -158,7 +164,6 @@ void World::checkCollision()
 		{
 			bomb.setCollided();
 			m_player.reduceLives();
-			std::cout << "Player lives " << m_player.getLives() << std::endl;
 		}
 	}
 	deleteBombs();
