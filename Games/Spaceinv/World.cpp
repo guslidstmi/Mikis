@@ -26,7 +26,7 @@ void World::update(Interface& window)
 	window.mWindow.draw(m_player.paddle);
 	drawEnemies(window);
 
-	m_player.update();
+	gameOver = m_player.update();
 	
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && timer > 15)
 	{
@@ -41,7 +41,6 @@ void World::update(Interface& window)
 	checkCollision();
 	drawBullets(window);
 	drawBombs(window);
-	
 }
 
 void World::spawnBullet() 
@@ -98,8 +97,7 @@ bool bombHasCollided(Bomb& b)
 
 void World::deleteBombs()
 {
-	std::vector<Bomb> bombs = enem.getBombs();
-	bombs.erase(std::remove_if(std::begin(bombs), std::end(bombs), bombHasCollided), std::end(bombs));
+	enem.getBombs().erase(std::remove_if(std::begin(enem.getBombs()), std::end(enem.getBombs()), bombHasCollided), std::end(enem.getBombs()));
 }
 
 void World::drawEnemies(Interface& window) 
@@ -146,7 +144,6 @@ void World::checkCollision()
 						enemy.setLives();
 						bullet.setCollided();
 					}
-					//	return;
 				}
 			}
 		}
@@ -160,9 +157,9 @@ void World::checkCollision()
 		if (paddleBox.intersects(bombBox))
 		{
 			bomb.setCollided();
-			std::cout << "you got hit" << std::endl;
+			m_player.reduceLives();
+			std::cout << "Player lives " << m_player.getLives() << std::endl;
 		}
 	}
-
 	deleteBombs();
 }

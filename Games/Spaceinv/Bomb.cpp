@@ -35,6 +35,3 @@ void Bomb::setCollided()
 
 float Bomb::x()		{ return m_bombCircle.getPosition().x; }
 float Bomb::y()		{ return m_bombCircle.getPosition().y; }
-float Bomb::left()	{ return x() - m_bombCircle.getRadius(); }
-float Bomb::right()	{ return x() + m_bombCircle.getRadius(); }
-float Bomb::top()	{ return y() - m_bombCircle.getRadius(); }

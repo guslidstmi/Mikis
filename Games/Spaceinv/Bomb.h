@@ -16,10 +16,6 @@ public:
 	void setCollided();
 	float y();
 	float x();
-	float left();
-	float right();
-	float top();
-	float bottom();
 
 private:
 	sf::Vector2f velocity;

@@ -9,17 +9,18 @@ class Player
 {
 public:
 	Player();
-	void update();
+	bool update();
 	sf::RectangleShape paddle;
 	float y();
 	float x();
 	float left();
 	float right();
+	int getLives();
+	void reduceLives();
 
 private:
 	sf::Vector2f velocity;
-	
-	
+	int m_lives;
 };
 
 #endif // PLAYER_H_

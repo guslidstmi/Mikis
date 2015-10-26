@@ -15,9 +15,9 @@ void Enemies::spawnEnemies()
 {
 	float x = 0.0f, y = 0.0f;
 	int i, z, id = 1, col = 1;
-	for (x = 35.0f, y = 20.0f, z = 0; z < 9; ++z)
+	for (x = 35.0f, z = 0; z < 9; ++z)
 	{
-		for (y = 20.0f, i = 1; i < 6; ++i)
+		for (y = 50.0f, i = 1; i < 6; ++i)
 		{
 			Enemy enemy(x, y, id, i % 2, col);
 
@@ -70,8 +70,6 @@ void Enemies::dropBomb()
 	srand(time(NULL));
 	int randNum = rand() % 8;
 
-	std::cout << "number " << randNum << std::endl;
-	std::cout << "id " << m_enemies[m_bums[randNum] - 1].getId() << std::endl;
 	if (!m_enemies[m_bums[randNum] - 1].isDestroyed())
 	{
 		Bomb bomb(m_enemies[m_bums[randNum] - 1].x(), m_enemies[m_bums[randNum] - 1].y());
