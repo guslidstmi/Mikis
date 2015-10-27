@@ -36,6 +36,8 @@ private:
 	int bombtimer2 = 0;
 	sf::FloatRect paddleBox;
 	sf::FloatRect bombBox;
+	sf::Texture m_heart_texture;
+	sf::Texture* heart_tex_p;
 	
 
 	

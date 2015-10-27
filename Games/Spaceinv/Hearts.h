@@ -11,11 +11,10 @@ public:
 
 	Hearts(int x, int y);
 	sf::Sprite m_heart;
-	void update();
+	void update(sf::Texture& heart_texture);
 
 private:
 
-	sf::Texture heart;
 	int timer;
 	int state;
 	sf::Vector2f scale;

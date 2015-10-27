@@ -4,26 +4,23 @@
 Hearts::Hearts(int x, int y) :
 	m_heart{}
 {
-	if (!heart.loadFromFile("Sprites/Heart.png"))
-	{
-		std::cout << "could not load small heart" << std::endl;
-	}
-	
-	m_heart.setTexture(heart);
-	m_heart.setTextureRect(sf::IntRect(0, 0, 30 ,30));
 	m_heart.setPosition(sf::Vector2f(x, y));
 	timer = 0;
 	state = 0;
 	scale = m_heart.getScale();
 }
 
-void Hearts::update()
+void Hearts::update(sf::Texture& heart_texture)
 {
+	if(m_heart.getTexture() == NULL)
+	{
+		m_heart.setTexture(heart_texture);
+		m_heart.setTextureRect(sf::IntRect(0, 0, 30, 30));
+	}
 	++timer;
 	if (timer == 60)
 	{
-		state = 1;
-		
+		state = 1;	
 	}
 	else if (timer == 120)
 	{

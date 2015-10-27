@@ -12,6 +12,10 @@ World::World() : m_player{}, m_bullets{}, m_enemies{}
 	
 	Enemies enem{};
 	gameOver = false;
+	if (!m_heart_texture.loadFromFile("Sprites/Heart.png"))
+	{
+		std::cout << "could not load heart" << std::endl;
+	}
 }
 
 void World::update(Interface& window)
@@ -27,7 +31,7 @@ void World::update(Interface& window)
 	window.mWindow.draw(m_player.paddle);
 	for (auto& heart : m_player.getHearts())
 	{
-		heart.update();
+		heart.update(m_heart_texture);
 		window.mWindow.draw(heart.m_heart);
 	}
 	drawEnemies(window);
