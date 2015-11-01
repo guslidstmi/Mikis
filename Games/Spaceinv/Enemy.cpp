@@ -1,13 +1,11 @@
 #include "Enemy.h"
 
 Enemy::Enemy(float x, float y, int id, int row, int col) : 
-	m_enemy{}
-
+	m_enemy{}, left{ 0, 0, 25, 25 }, front{28, 0, 25, 25}, right{52, 0, 25, 25}, 
+	explo1{75, 0, 25, 25}, explo2{100, 0, 25, 25}, explo3{125, 0, 25, 25}
 {
-	m_enemy.setSize({60.f, 20.f});
-	m_enemy.setFillColor(sf::Color::Blue);
+	
 	m_enemy.setPosition(x, y);
-	m_enemy.setOrigin(60.f / 2.f, 20.f / 2.f);
 	m_id = id;
 	m_row = row;
 	m_col = col;
@@ -16,16 +14,17 @@ Enemy::Enemy(float x, float y, int id, int row, int col) :
 
 }
 
-bool Enemy::update(int num)
+bool Enemy::update(int num, sf::Texture& texture)
 {
+	if (m_enemy.getTexture() == NULL)
+	{
+		m_enemy.setTexture(texture);
+		m_enemy.scale(1.7, 1.7);
+		m_enemy.setTextureRect(front);
+	}
 	if (m_enemy.getPosition().y > 525.f && !isDestroyed())
 	{
 		return true;
-	}
-	
-	if (isBottom())
-	{
-		m_enemy.setFillColor(sf::Color::Red);
 	}
 
 	switch (m_row)
@@ -38,26 +37,31 @@ bool Enemy::update(int num)
 			velocity.y = +20.f;
 			velocity.x = 0;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(front);
 			break;
 		case 1 :
 			velocity.y = 0;
 			velocity.x = +15.f;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(right);
 			break;
 		case 2 :
 			velocity.y = 0;
 			velocity.x = -15.f;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(left);
 			break;
 		case 3 :
 			velocity.y = 0;
 			velocity.x = -15.f;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(left);
 			break;
 		case 4 :
 			velocity.y = 0;
 			velocity.x = +15.f;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(right);
 			break;
 		}
 		break;
@@ -69,26 +73,31 @@ bool Enemy::update(int num)
 			velocity.y = +20.f;
 			velocity.x = 0;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(front);
 			break;
 		case 1:
 			velocity.y = 0;
 			velocity.x = -15.f;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(left);
 			break;
 		case 2:
 			velocity.y = 0;
 			velocity.x = +15.f;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(right);
 			break;
 		case 3:
 			velocity.y = 0;
 			velocity.x = +15.f;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(right);
 			break;
 		case 4:
 			velocity.y = 0;
 			velocity.x = -15.f;
 			m_enemy.move(velocity);
+			m_enemy.setTextureRect(left);
 			break;
 		}
 		break;
@@ -98,7 +107,6 @@ bool Enemy::update(int num)
 
 bool Enemy::isDestroyed() 
 {
-
 	return m_destroyed;
 }
 
@@ -135,6 +143,3 @@ void Enemy::setLives()
 
 float Enemy::x()		{ return m_enemy.getPosition().x; }
 float Enemy::y()		{ return m_enemy.getPosition().y; }
-float Enemy::bottom()	{ return y() + m_enemy.getSize().y / 2.f; }
-float Enemy::left()		{ return x() - m_enemy.getSize().x / 2.f; }
-float Enemy::right()	{ return x() + m_enemy.getSize().x / 2.f; }

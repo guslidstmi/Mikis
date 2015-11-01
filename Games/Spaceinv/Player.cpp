@@ -4,8 +4,6 @@
 Player::Player() :
 	paddle{}, m_hearts{}
 {
-	paddle.setSize({60.f, 20.f});
-	paddle.setFillColor(sf::Color::White);
 	paddle.setPosition(400, 550);
 	paddle.setOrigin(60.f / 2.f, 20.f /2.f);
 	m_lives = 3;
@@ -13,18 +11,36 @@ Player::Player() :
 
 }
 
-bool Player::update()
+bool Player::update(sf::Texture& texture)
 {
+	++m_timer;
+	if (paddle.getTexture() == NULL)
+	{
+		paddle.setTexture(texture);
+		paddle.setTextureRect(sf::IntRect(0, 0, 45, 20));
+	}
+
 	if(m_lives == 0)
 	{
 		return true;
 	}
+	if (m_timer < 40)
+	{
+		paddle.setTextureRect(sf::IntRect(0, 0, 45, 20));
+	}
+	else if (m_timer < 80)
+	{
+		paddle.setTextureRect(sf::IntRect(45, 0, 45, 20));
+	}
+	else 
+		{ m_timer = 0; }
+
 	paddle.move(velocity);
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) 
-		&& left() > 0) velocity.x = -10.f;
+		&& !paddle.getGlobalBounds().contains(5, 550)) velocity.x = -10.f;
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)
-		&& right() < 800) velocity.x = 10.f;
+		&& !paddle.getGlobalBounds().contains(790, 550)) velocity.x = 10.f;
 	else
 		velocity.x = 0;
 
@@ -33,8 +49,6 @@ bool Player::update()
 
 float Player::x()		{ return paddle.getPosition().x; }
 float Player::y()		{ return paddle.getPosition().y; }
-float Player::left()	{ return x() - paddle.getSize().x / 2.f; }
-float Player::right()	{ return x() + paddle.getSize().x / 2.f; }
 
 int Player::getLives()
 {

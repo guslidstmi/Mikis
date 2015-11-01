@@ -9,12 +9,10 @@ class Player
 {
 public:
 	Player();
-	bool update();
-	sf::RectangleShape paddle;
+	bool update(sf::Texture& texture);
+	sf::Sprite paddle;
 	float y();
 	float x();
-	float left();
-	float right();
 	int getLives();
 	void reduceLives();
 	void popHearts();
@@ -24,6 +22,7 @@ private:
 	sf::Vector2f velocity;
 	int m_lives;
 	std::vector<Hearts> m_hearts;
+	int m_timer = 0;
 };
 
 #endif // PLAYER_H_

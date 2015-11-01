@@ -7,7 +7,6 @@ Hearts::Hearts(int x, int y) :
 	m_heart.setPosition(sf::Vector2f(x, y));
 	timer = 0;
 	state = 0;
-	scale = m_heart.getScale();
 }
 
 void Hearts::update(sf::Texture& heart_texture)

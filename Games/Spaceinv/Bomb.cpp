@@ -3,20 +3,22 @@
 #define OffSet 25.f
 
 Bomb::Bomb(float x, float y) :
-m_bombCircle{}
+m_bomb{}
 {
-	m_bombCircle.setRadius(10.f);
-	m_bombCircle.setFillColor(sf::Color::Green);
-	m_bombCircle.setPosition(x, y - 5.f);
-	m_bombCircle.setOrigin(10.f / 2, 20.f / 2);
+	m_bomb.setPosition(x, y - 5.f);
+	m_bomb.setOrigin(10.f / 2, 20.f / 2);
 	collide = false;
 }
 
-void Bomb::update()
+void Bomb::update(sf::Texture& texture)
 {
+	if (m_bomb.getTexture() == NULL)
+	{
+		m_bomb.setTexture(texture);
+	}
 	velocity.y = +OffSet;
-	m_bombCircle.move(velocity);
-	if (m_bombCircle.getPosition().y > 525.f)
+	m_bomb.move(velocity);
+	if (m_bomb.getPosition().y > 525.f)
 	{
 		collide = true;
 	}
@@ -33,5 +35,5 @@ void Bomb::setCollided()
 	collide = true;
 }
 
-float Bomb::x()		{ return m_bombCircle.getPosition().x; }
-float Bomb::y()		{ return m_bombCircle.getPosition().y; }
+float Bomb::x()		{ return m_bomb.getPosition().x; }
+float Bomb::y()		{ return m_bomb.getPosition().y; }

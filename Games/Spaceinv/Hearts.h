@@ -17,7 +17,6 @@ private:
 
 	int timer;
 	int state;
-	sf::Vector2f scale;
 };
 
 

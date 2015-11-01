@@ -8,9 +8,9 @@
 class Enemy
 {
 public:
-	sf::RectangleShape m_enemy;
+	sf::Sprite m_enemy;
 	Enemy(float x = 0.0, float y = 0.0, int id = 0, int row = 0, int col = 0);
-	bool update(int num);
+	bool update(int num, sf::Texture& texture);
 	bool isDestroyed();
 	bool isBottom();
 	void setDestroyed();
@@ -18,11 +18,8 @@ public:
 	int getId();
 	int isDead();
 	void setLives();
-	float left();
-	float right();
 	float x();
 	float y();
-	float bottom();
 
 	inline int getCol() const { return m_col; };
 
@@ -35,6 +32,15 @@ private:
 	int m_col;
 	bool m_destroyed;
 	bool m_bottom = false;
+	sf::IntRect left;
+	sf::IntRect front;
+	sf::IntRect right;
+	sf::IntRect explo1;
+	sf::IntRect explo2;
+	sf::IntRect explo3;
+
+
+
 	
 };
 

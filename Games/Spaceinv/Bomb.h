@@ -10,8 +10,8 @@ class Bomb
 {
 public:
 	Bomb(float x, float y);
-	void update();
-	sf::CircleShape m_bombCircle;
+	void update(sf::Texture& texture);
+	sf::Sprite m_bomb;
 	bool hasCollided();
 	void setCollided();
 	float y();

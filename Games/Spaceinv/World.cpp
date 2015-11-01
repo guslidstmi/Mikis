@@ -12,9 +12,10 @@ World::World() : m_player{}, m_bullets{}, m_enemies{}
 	
 	Enemies enem{};
 	gameOver = false;
-	if (!m_heart_texture.loadFromFile("Sprites/Heart.png"))
+	if (!m_heart_texture.loadFromFile("Sprites/Heart.png") || !m_enemy_texture.loadFromFile("Sprites/Enemies_full.png") || 
+		!m_bomb_texture.loadFromFile("Sprites/bomb.png") || !m_player_texture.loadFromFile("Sprites/Player_canon.png"))
 	{
-		std::cout << "could not load heart" << std::endl;
+		std::cout << "could not load texture" << std::endl;
 	}
 }
 
@@ -36,7 +37,7 @@ void World::update(Interface& window)
 	}
 	drawEnemies(window);
 
-	gameOver = m_player.update();
+	gameOver = m_player.update(m_player_texture);
 	
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && timer > 15)
 	{
@@ -63,7 +64,6 @@ void World::spawnBullet()
 
 void World::drawBullets(Interface& window) 
 {
-
 	for (auto& x : m_bullets)
 	{
 		x.update();
@@ -78,15 +78,15 @@ void World::drawBombs(Interface& window)
 	{
 		for (auto& bomb : enem.getBombs())
 		{
-			bomb.update();
-			window.mWindow.draw(bomb.m_bombCircle);
+			bomb.update(m_bomb_texture);
+			window.mWindow.draw(bomb.m_bomb);
 		}
 		bombtimer2 = 0;
 	}
 
 	for (auto& bomb : enem.getBombs())
 	{
-		window.mWindow.draw(bomb.m_bombCircle);
+		window.mWindow.draw(bomb.m_bomb);
 	}
 }
 
@@ -116,7 +116,7 @@ void World::drawEnemies(Interface& window)
 	{
 		if(enemytimer % 40 == 0)
 		{
-			gameOver = x.update(movetimer);
+			gameOver = x.update(movetimer, m_enemy_texture);
 		}
 		if (!x.isDestroyed())
 		window.mWindow.draw(x.m_enemy);
@@ -134,12 +134,14 @@ void World::checkCollision()
 {
 	for(auto& bullet : m_bullets)
 	{
+		bulletBox = bullet.m_bulletRect.getGlobalBounds();
 		for (auto& enemy : enem.getEnemies())
 		{
+			enemBox = enemy.m_enemy.getGlobalBounds();
 			if (!enemy.isDestroyed())
 			{
 				// Check if bullet and enemy has collided, i.e. their x and y position intersect.
-				if (bullet.top() <= enemy.bottom() && bullet.left() <= enemy.right() && bullet.right() >= enemy.left())
+				if (bulletBox.intersects(enemBox))
 				{
 					// check if enemy only has one life left, then it's destroyed
  					if (enemy.isDead() == 1)
@@ -163,7 +165,7 @@ void World::checkCollision()
 
 	for (auto& bomb : enem.getBombs())
 	{
-		bombBox = bomb.m_bombCircle.getGlobalBounds();
+		bombBox = bomb.m_bomb.getGlobalBounds();
 		if (paddleBox.intersects(bombBox))
 		{
 			bomb.setCollided();

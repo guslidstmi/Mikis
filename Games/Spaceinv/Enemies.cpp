@@ -15,7 +15,7 @@ void Enemies::spawnEnemies()
 {
 	float x = 0.0f, y = 0.0f;
 	int i, z, id = 1, col = 1;
-	for (x = 35.0f, z = 0; z < 9; ++z)
+	for (x = 20.0f, z = 0; z < 9; ++z)
 	{
 		for (y = 50.0f, i = 1; i < 6; ++i)
 		{

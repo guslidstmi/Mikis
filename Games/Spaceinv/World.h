@@ -36,8 +36,12 @@ private:
 	int bombtimer2 = 0;
 	sf::FloatRect paddleBox;
 	sf::FloatRect bombBox;
+	sf::FloatRect bulletBox;
+	sf::FloatRect enemBox;
 	sf::Texture m_heart_texture;
-	sf::Texture* heart_tex_p;
+	sf::Texture m_enemy_texture;
+	sf::Texture m_bomb_texture;
+	sf::Texture m_player_texture;
 	
 
 	
