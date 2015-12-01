@@ -14,6 +14,7 @@ public:
 	std::vector<Bomb>& getBombs();
 	void dropBomb();
 	void determBottom(int id);
+	int numberOfAlive;
 
 private:
 	std::vector<Enemy> m_enemies;

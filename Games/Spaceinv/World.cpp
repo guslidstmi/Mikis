@@ -19,11 +19,15 @@ World::World() : m_player{}, m_bullets{}, m_enemies{}
 	}
 }
 
-void World::update(Interface& window)
+int World::update(Interface& window)
 {
 	if(gameOver)
 	{
-		exit(EXIT_SUCCESS);
+		return 2;
+	}
+	else if (enem.numberOfAlive == 0)
+	{
+		return 3;
 	}
 	++timer;
 	++enemytimer;
@@ -52,6 +56,8 @@ void World::update(Interface& window)
 	checkCollision();
 	drawBullets(window);
 	drawBombs(window);
+
+	return 1;
 }
 
 void World::spawnBullet() 
@@ -146,6 +152,7 @@ void World::checkCollision()
 					// check if enemy only has one life left, then it's destroyed
  					if (enemy.isDead() == 1)
 					{
+						--enem.numberOfAlive;
 						enemy.setDestroyed();
  						enem.determBottom(enemy.getId());
 						bullet.setCollided();

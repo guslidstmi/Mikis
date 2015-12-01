@@ -8,6 +8,7 @@
 Enemies::Enemies() : 
 	m_enemies{}, m_bums{}, m_bombs{}
 {
+	numberOfAlive = 0;
 	spawnEnemies();
 }
 
@@ -35,6 +36,7 @@ void Enemies::spawnEnemies()
 		x += x_enemy;
 		++col;
 	}
+	numberOfAlive = m_enemies.size();
 }
 
 std::vector<Enemy>& Enemies::getEnemies()

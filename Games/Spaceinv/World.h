@@ -12,7 +12,7 @@ class World
 {
 public:
 	World();
-	void update(Interface& window);
+	int update(Interface& window);
 	void spawnBullet();
 	void drawBullets(Interface& window);
 	void drawEnemies(Interface& window);
