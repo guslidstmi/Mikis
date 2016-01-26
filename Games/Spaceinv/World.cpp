@@ -13,7 +13,7 @@ World::World() : m_player{}, m_bullets{}, m_enemies{}
 	Enemies enem{};
 	gameOver = false;
 	if (!m_heart_texture.loadFromFile("Sprites/Heart.png") || !m_enemy_texture.loadFromFile("Sprites/Enemies_full.png") || 
-		!m_bomb_texture.loadFromFile("Sprites/bomb.png") || !m_player_texture.loadFromFile("Sprites/Player_canon.png"))
+		!m_bomb_texture.loadFromFile("Sprites/Bomb.png") || !m_player_texture.loadFromFile("Sprites/Player_canon.png"))
 	{
 		std::cout << "could not load texture" << std::endl;
 	}
