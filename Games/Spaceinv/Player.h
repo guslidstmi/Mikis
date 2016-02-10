@@ -1,6 +1,5 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
-#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "Hearts.h"
