@@ -1,6 +1,5 @@
 #ifndef HEARTS_H_
 #define HEARTS_H_
-#pragma once
 
 #include "SFML/Graphics.hpp"
 #include <string>
