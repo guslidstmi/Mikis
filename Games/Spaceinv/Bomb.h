@@ -1,6 +1,5 @@
 #ifndef BOMB_H_
 #define BOMB_H_
-#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
