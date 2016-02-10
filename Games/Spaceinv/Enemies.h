@@ -1,6 +1,5 @@
 #ifndef ENEMIES_H_
 #define ENEMIES_H_
-#pragma once
 
 #include <vector>
 #include "Enemy.h"
