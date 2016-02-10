@@ -1,6 +1,5 @@
 #ifndef INTERFACE_H_
 #define INTERFACE_H_
-#pragma once
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
