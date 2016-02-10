@@ -1,6 +1,5 @@
 #ifndef BULLET_H_
 #define BULLET_H_
-#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
