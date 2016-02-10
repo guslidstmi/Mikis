@@ -1,6 +1,5 @@
 #ifndef WORLD_H_
 #define WORLD_H_
-#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
