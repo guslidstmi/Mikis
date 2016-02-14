@@ -1,15 +1,17 @@
-/* This class provides the logic for the Bulls and Cows word game
-based on the original peg game Mastermind
+/* This class provides the logic (no view code or direct user interaction) 
+for the Bulls and Cows word game based on the original peg game Mastermind
 */
 
 #ifndef FBULLCOWGAME_H
 #define FBULLCOWGAME_H
 
 #include <string>
+#include <stdlib.h>
+#include <time.h>
 
-
+// type substitutions to be more like Unreal code
 using FString = std::string;
-using int32 = int; // type substitution to make more like Unreal code
+using int32 = int;
 
 struct FBullCowCount
 {
@@ -28,29 +30,25 @@ enum class EGuessStatus
 
 };
 
-enum class EResetStatus
-{};
-
 class FBullCowGame {
 public:
 	
-	FBullCowGame(); // constructor
+	FBullCowGame(); // default constructor
 
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
 	bool IsGameWon() const;
-	EGuessStatus checkGuessValidity(FString) const; 
+	EGuessStatus checkGuessValidity(const FString) const; 
 
-	void Reset(); 
-	FBullCowCount SubmitValidGuess(FString);
+	void Reset(const int32); 
+	FBullCowCount SubmitValidGuess(const FString);
 
 
 private:
 
 	bool IsIsogram(FString) const;
-
-	int32 m_maxTries;
+	FString generateHiddenWord(const int32);
 	int32 m_currentTry;
 	FString m_hiddenWord;
 	bool bHasWon;

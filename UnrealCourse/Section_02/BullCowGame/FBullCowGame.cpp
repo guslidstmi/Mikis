@@ -1,31 +1,40 @@
+/* This is class contains the game logic for the BullCow Game */
+
+#pragma once
+
 #include "FBullCowGame.h"
 #include <algorithm>
 #include <map>
-#define TMap std::map
 
-FBullCowGame::FBullCowGame() { Reset(); }
+#define TMap std::map // to make syntax Unreal friendly
+
+FBullCowGame::FBullCowGame() { Reset(1); } // default constructor
 // Getters
-int32 FBullCowGame::GetMaxTries() const { return m_maxTries; }
 int32 FBullCowGame::GetCurrentTry() const { return m_currentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return m_hiddenWord.length(); }
 bool FBullCowGame::IsGameWon() const { return bHasWon; }
 
-void FBullCowGame::Reset()
+int32 FBullCowGame::GetMaxTries() const
 {
-	constexpr int32 MAX_TRIES = 8;
-	const FString HIDDEN_WORD = "planet";
+	TMap<int32, int32> WordLengthToMaxTries{ {3,4}, {4, 7}, {5,10}, {6,16}, {7,20}, {8,22}, {9,25}, {10,28} };
+
+	return WordLengthToMaxTries[m_hiddenWord.length()];
+}
+
+// Resets the game, generating a new word based on difficulty and resetting the stats.
+void FBullCowGame::Reset(const int32 difficulty)
+{
+	const FString HIDDEN_WORD = generateHiddenWord(difficulty); // this MUST be an isogram
 
 	m_hiddenWord = HIDDEN_WORD;
-	m_maxTries = MAX_TRIES;
 	m_currentTry = 1;
 	bHasWon = false;
 	
 	return;
 }
 
-EGuessStatus FBullCowGame::checkGuessValidity(FString Guess) const
+EGuessStatus FBullCowGame::checkGuessValidity(const FString Guess) const
 {
-	//if the guess is not an isogram 
 	if (!IsIsogram(Guess)) // if the guess is not an isogram
 	{
 		return EGuessStatus::Not_Isogram;
@@ -50,7 +59,7 @@ EGuessStatus FBullCowGame::checkGuessValidity(FString Guess) const
 	return EGuessStatus::OK; 
 }
 
-bool FBullCowGame::IsIsogram(FString Guess) const
+bool FBullCowGame::IsIsogram(const FString Guess) const
 {
 	// treat 0 and 1 letter words as isograms
 	if (Guess.length() < 2)
@@ -75,8 +84,31 @@ bool FBullCowGame::IsIsogram(FString Guess) const
 	return true;
 }
 
+// Generate a word for the user to guess based on difficulty. 
+FString FBullCowGame::generateHiddenWord(const int32 difficulty)
+{
+	srand(time(NULL));
+	int32 randomNum = rand() % 10 + 1;
+
+	TMap<int32, FString>EasyWords{ { 1, "cow" },{ 2, "cat" },{ 3, "dog" },{ 4, "hat" },{ 5, "rat" },
+	{ 6, "monk" },{ 7, "crow" },{ 8, "frog" },{ 9, "harp" },{ 10, "king" } };
+	TMap<int32, FString>NormalWords{ { 1, "mouse" },{ 2, "trash" },{ 3, "crown" },{ 4, "horse" },{ 5, "grams" },
+	{ 6, "planet" },{ 7, "jockey" },{ 8, "mount" },{ 9, "python" },{ 10, "royal" } };
+	TMap<int32, FString>HardWords{ { 1, "blacksmith" },{ 2, "gunpowder" },{ 3, "dumbing" },{ 4, "stumped" },
+	{ 5, "isogram" },{ 6, "agents" },{ 7, "polarity" },{ 8, "jokingly" },{ 9, "chipmunk" },{ 10, "jumpable" } };
+
+	switch (difficulty)
+	{
+	case 1: return EasyWords[randomNum]; break;
+	case 2: return NormalWords[randomNum]; break;
+	case 3: return HardWords[randomNum]; break;
+	default: return "planet";
+
+	}
+}
+
 // recieves a VALID guess, increments turn and returns count
-FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
+FBullCowCount FBullCowGame::SubmitValidGuess(const FString Guess)
 {
 	++m_currentTry;
 	FBullCowCount BullCowCount;

@@ -3,6 +3,8 @@ This acts as the view in a MVC pattern, and is responsible for all
 user interaction. For game logic see the FBullCowGame class.
 */
 
+#pragma once
+
 #include <iostream>
 #include <string>
 #include "FBullCowGame.h"
@@ -11,7 +13,7 @@ user interaction. For game logic see the FBullCowGame class.
 using Ftext = std::string;
 using int32 = int;
 
-// function prototypes (or declarations), defenitions are below
+// function prototypes as outside a class, definitions are below
 void PrintIntro();
 void PlayGame();
 void PrintGameSummary();
@@ -43,15 +45,26 @@ void PrintIntro()
 	std::cout << "(  _ (  )(  |  ) (  ) / __)    /__\\ ( \\( |  _ \\    / __|  _  | \\/\\/ ) __) " << std::endl;
 	std::cout << " ) _ <)(__)( )(__ )(__\\__ \\   /(__)\\ )  ( )(_) )  ( (__ )(_)( )    (\\__ \\ " << std::endl;
 	std::cout << "(____(______|____|____|___/  (__)(__|_)\\_|____/    \___|_____|__/\\__|___/ \n" << std::endl;
-	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I am thinking of?" << std::endl;
 	return;
 }
 
+// plays a single game to completion
 void PlayGame()
 {
-	BCGame.Reset();
+	// prompt the user to select a difficulty so we can generate a word based on this.
+	std::cout << "Please choose a difficulty!" << std::endl;
+	std::cout << "1. Easy" << std::endl;
+	std::cout << "2. Normal" << std::endl;
+	std::cout << "3. Hard" << std::endl;
+
+	int32 difficulty = 0;
+	std::cin >> difficulty;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	BCGame.Reset(difficulty);
+
 	int32 maxTries = BCGame.GetMaxTries();
 
+	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I am thinking of?" << std::endl;
 	// loop for the number of turns asking for guesses
 
 	while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= maxTries)
