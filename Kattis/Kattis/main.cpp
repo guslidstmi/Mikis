@@ -1,48 +1,64 @@
 #include <iostream>
-#include <vector>
 #include <string>
 #include <limits>
-#include <bitset>
+#include <vector>
+#include <map>
+#include <set>
 
-int factorial(int);
+int factorial(unsigned long);
+int findAllSet(std::string, std::string, int, int);
+void pairUp(std::map<int, std::vector<std::vector<bool>>>&,
+	std::string, std::string, std::string);
 
 int main()
 {
-	int number_of_switches = 0;
-	int number_of_photos = 0;
+	int number_of_switches = 0, number_of_photos = 0;
 
 	std::cin >> number_of_switches >> number_of_photos;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	std::bitset<1000> wirings = std::bitset<1000>().set();
-	
 	
 	if (number_of_photos > 0)
 	{
-		std::vector<std::bitset<1000>> switches(number_of_photos);
-		std::vector<std::bitset<1000>> lights(number_of_photos);
-		for (int j = 0, i = 0; i < number_of_photos * 2; ++i)
+		std::string switches = "", lights = "";
+		int setSwitches  = 0, setLights = 0, unSetSwitches = 0, 
+			unSetLights = 0, tempSets = 0, tempZeros = 0;
+		std::map<int, std::vector<std::vector<bool>>> setMap, zeroMap;
+		for (int i = 0; i < number_of_photos * 2; ++i)
 		{
 			if (i % 2 == 0)
 			{
-				std::string stringSwitch = "";
-				std::getline(std::cin, stringSwitch);
-				switches[j] = std::bitset<1000>(stringSwitch);
+				std::getline(std::cin, switches);
 			}
 			else
 			{
-				std::string stringLight = "";
-				std::getline(std::cin, stringLight);
-				lights[j] = std::bitset<1000>(stringLight);
-				++j;
+				std::getline(std::cin, lights);
+
+				setSwitches = findAllSet(switches, "1", 0, 0);
+				setLights = findAllSet(lights, "1", 0, 0);
+
+				if (setSwitches != setLights)
+				{
+					std::cout << 0 << "\n";
+					return 0;
+				}
+				pairUp(setMap, switches, lights, "1");
+				//pairUp(zeroMap, switches, lights, "0");
 			}
 		}
 
-		for (int i = 0; i < number_of_photos; ++i)
+		for (auto& map : setMap)
 		{
-			wirings &= (switches[i] & lights[i]);
+			for (auto& vector : map.second)
+			{
+				for (auto& bit : vector)
+				{
+					std::cout << bit;
+				}
+				std::cout << "\n";
+			}
 		}
-		std::cout << "wirings bit " << wirings.to_ullong() << "\n";
 
+		//std::cout << factorial(tempSets) * factorial(tempZeros) << "\n";
 	}
 	else
 	{
@@ -53,11 +69,37 @@ int main()
 	return 0;
 }
 
-int factorial(int num)
+int factorial(unsigned long num)
 {
-	if (num == 1)
+	if (num == 1 || num == 0)
+	{
+		return 1;
+	}
+	return factorial(num - 1) * num % 1000003;
+}
+
+int findAllSet(std::string s, std::string c, int position, int num)
+{
+	int result = s.find(c, position);
+	if (result == std::string::npos)
 	{
 		return num;
 	}
-	return factorial(num - 1) * num % 1000003;
+
+	++num;
+	return findAllSet(s, c, ++result, num % 1000003);
+}
+void pairUp(std::map<int, std::vector<std::vector<bool>>>& setMap, 
+	std::string switches, std::string lights, std::string c)
+{
+	int position = 0, result = 0;
+	for (result = switches.find(c, result); result != std::string::npos;)
+	{
+		std::vector<bool> tempVect(lights.length(), 0);
+		position = lights.find(c, position);
+		tempVect[position] = 1;
+		setMap[result].push_back(tempVect);
+		++position;
+		++result;
+	}
 }
