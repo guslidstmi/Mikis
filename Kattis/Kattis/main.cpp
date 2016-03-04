@@ -48,12 +48,13 @@ int main()
 
 		for (auto& map : setMap)
 		{
-			for (auto& vector : map.second)
+			for (std::vector<bool> vector : map.second)
 			{
-				for (auto& bit : vector)
+				for(const bool& b : vector)
 				{
-					std::cout << bit;
+					std::cout <<  b;
 				}
+
 				std::cout << "\n";
 			}
 		}
@@ -93,13 +94,21 @@ void pairUp(std::map<int, std::vector<std::vector<bool>>>& setMap,
 	std::string switches, std::string lights, std::string c)
 {
 	int position = 0, result = 0;
-	for (result = switches.find(c, result); result != std::string::npos;)
+	while (result != std::string::npos)
 	{
-		std::vector<bool> tempVect(lights.length(), 0);
-		position = lights.find(c, position);
-		tempVect[position] = 1;
-		setMap[result].push_back(tempVect);
-		++position;
-		++result;
+		result = switches.find(c, result);
+		if(result >= 0)
+		{
+			std::cout << "Hai: " << result << std::endl;
+			std::vector<bool> tempVect(lights.length(), 0);
+			position = lights.find(c, position);
+			tempVect[position] = 1;
+			std::cout << "tempVect " << tempVect[position] << std::endl;
+			setMap[result].push_back(tempVect);
+			++position;
+			++result;
+		}
+		
 	}
+	std::cout<< "Leaving pairup" << std::endl;
 }
