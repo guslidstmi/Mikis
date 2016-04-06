@@ -157,11 +157,11 @@ $RECYCLE.BIN/
 
 # Unreal Generated Files
 
-*/Build
-*/Binaries
-*/DerivedDataCache
+/UnrealCourse/03_BuildingEscape/BuildingEscape/Build
+/UnrealCourse/03_BuildingEscape/BuildingEscape/Binaries
+/UnrealCourse/03_BuildingEscape/BuildingEscape/DerivedDataCache
 /UnrealCourse/03_BuildingEscape/BuildingEscape/Intermediate
-*/Saved
+/UnrealCourse/03_BuildingEscape/BuildingEscape/Saved
 /UnrealCourse/03_BuildingEscape/BuildingEscape/Content/StarterContent
 
 *.VC.opendb
