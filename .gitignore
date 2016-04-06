@@ -154,3 +154,13 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+# Unreal Generated Files
+
+*/Build
+*/Binaries
+*/DerivedDataCache
+*/Intermediate
+*/Saved
+UnrealCourse/03_BuildingEscape/BuildingEscape/Content/StarterContent
+*.VC.opendb
