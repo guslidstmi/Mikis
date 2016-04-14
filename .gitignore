@@ -162,7 +162,7 @@ $RECYCLE.BIN/
 /UnrealCourse/03_BuildingEscape/BuildingEscape/DerivedDataCache
 /UnrealCourse/03_BuildingEscape/BuildingEscape/Intermediate
 /UnrealCourse/03_BuildingEscape/BuildingEscape/Saved
-/UnrealCourse/03_BuildingEscape/BuildingEscape/Content/StarterContent
-
+/UnrealCourse/03_BuildingEscape/BuildingEscape/Content/StarterContent/Textures
+/UnrealCourse/03_BuildingEscape/BuildingEscape/Content/StarterContent/HDRI
 *.VC.opendb
 */BuildingEscape/*.sdf
