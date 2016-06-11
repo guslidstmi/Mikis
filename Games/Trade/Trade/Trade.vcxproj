@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{76701DE4-B9B3-4615-89AA-D17E8476D785}</ProjectGuid>
-    <RootNamespace>primer</RootNamespace>
+    <ProjectGuid>{4220C171-A94E-4332-8C91-50293292CF9F}</ProjectGuid>
+    <RootNamespace>Trade</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -110,12 +110,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Inheritance.cpp" />
-    <ClCompile Include="Sales_item.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Sales_item.h" />
-    <ClInclude Include="Version_test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
