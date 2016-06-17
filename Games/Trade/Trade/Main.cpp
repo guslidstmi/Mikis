@@ -71,7 +71,7 @@ int main()
 
 bool nearbyCity(int i, int j, int grid[20][20])
 {
-	if (grid[i - 1][j] == 1 || grid[i-1][j-1] == 1 || grid[i + 1][j - 1] == 1 || 
+	if (grid[i - 1][j] == 1 || grid[i - 1][j - 1] == 1 || grid[i - 1][j + 1] == 1 || 
 		grid[i + 1][j] == 1 || grid[i + 1][j - 1] == 1 || grid[i + 1][j + 1] == 1 ||
 		grid[i][j - 1] == 1 || grid[i][j + 1] == 1)
 	{
