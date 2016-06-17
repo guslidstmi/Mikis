@@ -118,13 +118,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="City.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="City.h" />
+    <ClInclude Include="Map.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

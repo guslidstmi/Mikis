@@ -1,10 +1,10 @@
-#include "Circle.h"
+#include "Tile.h"
 
-Circle::Circle()
+Tile::Tile()
 {
 }
 
-Circle::Circle(float x, float y, int colour) :
+Tile::Tile(float x, float y, int colour) :
 	m_Rect{}
 {
 	if (colour == 2)
@@ -13,11 +13,12 @@ Circle::Circle(float x, float y, int colour) :
 	}
 	else
 		m_Rect.setFillColor(sf::Color::Blue);
+
 	m_Rect.setSize(sf::Vector2f(40.0,30.0));
 	m_Rect.setPosition(x, y);
 }
 
-sf::RectangleShape & Circle::m_getRect()
+sf::RectangleShape & Tile::m_getRect()
 {
 	return m_Rect;
 }

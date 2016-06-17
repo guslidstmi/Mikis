@@ -1,11 +1,11 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
-class Circle
+class Tile
 {
 public :
-	Circle();
-	Circle(float x, float y, int colour);
+	Tile();
+	Tile(float x, float y, int colour);
 	sf::RectangleShape& m_getRect();
 
 private:
