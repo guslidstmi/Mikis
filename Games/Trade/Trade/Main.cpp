@@ -9,6 +9,7 @@ int main()
 	mWindow.setFramerateLimit(60);
 	sf::Event event;
 	Map worldMap;
+	bool start = true;
 	
 	while (mWindow.isOpen())
 	{
@@ -17,6 +18,14 @@ int main()
 		if (event.type == sf::Event::Closed)
 		{
 			mWindow.close();
+		}
+		if (event.type == sf::Event::MouseButtonPressed && start == true)
+		{
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				worldMap.placeCity(event.mouseButton.x, event.mouseButton.y);
+				start = false;
+			}
 		}
 		for (int i = 0; i < worldMap.getMap().size(); ++i)
 		{

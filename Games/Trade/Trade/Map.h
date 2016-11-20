@@ -9,10 +9,12 @@ public:
 	Map();
 	std::vector<Tile>& getMap();
 	std::vector<City>& getCities();
+	void placeCity(int x, int y);
 
 private:
 	void generateMap();
 	bool nearbyCity(int i, int j, int grid[20][20]);
+	void generateCities();
 
 	std::vector<Tile> environment;
 	std::vector<City> cities;
