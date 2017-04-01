@@ -10,5 +10,4 @@ mWindow{ { windowWidth, windowHeight }, "Space Invaders - Game" }
 	}
 	backgroundSprite.setTexture(background);
 	backgroundSprite.setPosition(sf::Vector2f(0.f, 0.f));
-	
 }

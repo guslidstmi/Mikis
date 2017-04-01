@@ -7,8 +7,7 @@
 #include <iostream>
 
 namespace {
-
-	unsigned int windowWidth{ 800 }, windowHeight{ 600 };
+	unsigned const windowWidth{ 800 }, windowHeight{ 600 };
 }
 
 class Interface

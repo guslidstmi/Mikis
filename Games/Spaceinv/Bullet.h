@@ -8,23 +8,17 @@
 class Bullet
 {
 public:
-	Bullet(float x, float y);
+	Bullet(const float x, const float y);
 	void update();
 	sf::CircleShape m_bulletRect;
-	bool hasCollided();
+	const bool hasCollided();
 	void setCollided();
-	float y();
-	float x();
-	float left();
-	float right();
-	float top();
-	float bottom();
+	const float y();
+	const float x();
 
 private:
 	sf::Vector2f velocity;
 	bool collide;
-
-	
 };
 
 #endif // BULLET_H_

@@ -1,8 +1,10 @@
 #include "Bullet.h"
 
-#define OffSet 10.f
+namespace {
+	float const OffSet = 10.f;
+};
 
-Bullet::Bullet(float x, float y) : 
+Bullet::Bullet(const float x, const float y) : 
 	m_bulletRect{}
 {
 	m_bulletRect.setRadius(3.f);
@@ -14,7 +16,7 @@ Bullet::Bullet(float x, float y) :
 
 void Bullet::update()
 {
-	velocity.y = -OffSet;
+	velocity.y -= OffSet;
 	m_bulletRect.move(velocity);
 	if(m_bulletRect.getPosition().y < 0) 
 	{
@@ -23,9 +25,8 @@ void Bullet::update()
 
 }
 
-bool Bullet::hasCollided() 
+const bool Bullet::hasCollided() 
 {
-
 	return collide;
 }
 
@@ -34,8 +35,5 @@ void Bullet::setCollided()
 	collide = true;
 }
 
-float Bullet::x()		{ return m_bulletRect.getPosition().x; }
-float Bullet::y()		{ return m_bulletRect.getPosition().y; }
-float Bullet::left()	{ return x() - m_bulletRect.getRadius(); }
-float Bullet::right()	{ return x() + m_bulletRect.getRadius(); }
-float Bullet::top()		{ return y() - m_bulletRect.getRadius(); }
+const float Bullet::x()		{ return m_bulletRect.getPosition().x; }
+const float Bullet::y()		{ return m_bulletRect.getPosition().y; }
