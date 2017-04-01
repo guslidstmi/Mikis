@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
 namespace {
-	float const OffSet = 10.f;
+	constexpr float OffSet = 10.f;
 };
 
 Bullet::Bullet(const float x, const float y) : 
@@ -25,7 +25,7 @@ void Bullet::update()
 
 }
 
-const bool Bullet::hasCollided() 
+const bool Bullet::hasCollided() const
 {
 	return collide;
 }
@@ -35,5 +35,5 @@ void Bullet::setCollided()
 	collide = true;
 }
 
-const float Bullet::x()		{ return m_bulletRect.getPosition().x; }
-const float Bullet::y()		{ return m_bulletRect.getPosition().y; }
+const float Bullet::x()	const	{ return m_bulletRect.getPosition().x; }
+const float Bullet::y() const	{ return m_bulletRect.getPosition().y; }

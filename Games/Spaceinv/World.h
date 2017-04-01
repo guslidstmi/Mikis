@@ -3,9 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
-#include "Enemies.h"
-#include "Interface.h"
+#include "EnemyController.h"
 #include "Player.h"
+
+class Interface;
 
 class World
 {
@@ -25,24 +26,21 @@ private:
 	std::vector<Bullet> m_bullets;
 	std::vector<Enemy> m_enemies;
 	Player m_player;
-	Enemies enem;
-	bool gameOver;
-	int timer = 0;
-	int enemytimer = 0;
-	int movetimer = 0;
-	int bombtimer = 0;
-	int bombtimer2 = 0;
-	sf::FloatRect paddleBox;
-	sf::FloatRect bombBox;
-	sf::FloatRect bulletBox;
-	sf::FloatRect enemBox;
+	EnemyController m_enemyController;
+	bool m_gameOver;
+	int m_timer;
+	int m_enemytimer;
+	int m_movetimer;
+	int m_bombtimer;
+	int m_bombtimer2;
+	sf::FloatRect m_paddleBox;
+	sf::FloatRect m_bombBox;
+	sf::FloatRect m_bulletBox;
+	sf::FloatRect m_enemyBox;
 	sf::Texture m_heart_texture;
 	sf::Texture m_enemy_texture;
 	sf::Texture m_bomb_texture;
 	sf::Texture m_player_texture;
-	
-
-	
 };
 
 #endif // WORLD_H_

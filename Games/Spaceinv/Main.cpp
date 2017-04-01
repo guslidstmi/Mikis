@@ -1,9 +1,9 @@
 #include "Interface.h"
 #include "World.h"
+#include <iostream>
 
 int main()
 {
-
 	Interface interface{};
 	World world{};
 	int num = 0;
@@ -132,7 +132,5 @@ int main()
 			break;
 		}
 	}
-
 	return 0;
-
 }

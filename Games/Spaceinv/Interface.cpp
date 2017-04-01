@@ -1,4 +1,5 @@
 #include "Interface.h"
+#include <iostream>
 
 Interface::Interface() :
 mWindow{ { windowWidth, windowHeight }, "Space Invaders - Game" }

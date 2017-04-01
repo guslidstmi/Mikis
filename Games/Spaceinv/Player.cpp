@@ -15,7 +15,7 @@ Player::Player() :
 const bool Player::update(const sf::Texture& texture)
 {
 	++m_timer;
-	if (paddle.getTexture() == NULL)
+	if (paddle.getTexture() == nullptr)
 	{
 		paddle.setTexture(texture);
 		paddle.setTextureRect(sf::IntRect(0, 0, 45, 20));

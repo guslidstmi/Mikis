@@ -11,14 +11,14 @@ public:
 	Bomb(const float x, const float y);
 	void update(const sf::Texture& texture);
 	sf::Sprite m_bomb;
-	const bool hasCollided();
+	const bool hasCollided() const;
 	void setCollided();
-	const float y();
-	const float x();
+	const float y() const;
+	const float x() const;
 
 private:
 	sf::Vector2f velocity;
-	bool collide;
+	bool m_collide;
 
 
 };

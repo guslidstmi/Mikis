@@ -1,14 +1,14 @@
-#ifndef ENEMIES_H_
-#define ENEMIES_H_
+#ifndef ENEMYCONTROLLER_H_
+#define ENEMYCONTROLLER_H_
 
 #include <vector>
 #include "Enemy.h"
 #include "Bomb.h"
 
-class Enemies
+class EnemyController
 {
 public:
-	Enemies();
+	EnemyController();
 	std::vector<Enemy>& getEnemies();
 	std::vector<Bomb>& getBombs();
 	void dropBomb();

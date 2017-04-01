@@ -11,10 +11,10 @@ public:
 	Bullet(const float x, const float y);
 	void update();
 	sf::CircleShape m_bulletRect;
-	const bool hasCollided();
+	const bool hasCollided() const;
 	void setCollided();
-	const float y();
-	const float x();
+	const float y() const;
+	const float x() const;
 
 private:
 	sf::Vector2f velocity;

@@ -4,10 +4,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include <iostream>
 
 namespace {
-	unsigned const windowWidth{ 800 }, windowHeight{ 600 };
+	const unsigned int windowWidth{ 800 }, windowHeight{ 600 };
 }
 
 class Interface

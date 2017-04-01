@@ -8,27 +8,22 @@ class Enemy
 {
 public:
 	sf::Sprite m_enemy;
-	Enemy(const float x = 0.0, const float y = 0.0, const int id = 0, const int row = 0, const int col = 0);
+	Enemy(const float x = 0.0, const float y = 0.0, const int id = 0);
 	const bool update(const int num, const sf::Texture& texture);
-	const bool isDestroyed();
-	const bool isBottom();
+	const bool isDestroyed() const;
+	const bool isBottom() const;
 	void setDestroyed();
 	void setBottom();
-	const int getId();
-	const int isDead();
+	const int getId() const;
+	const int isDead() const;
 	void setLives();
-	const float x();
-	const float y();
-
-	inline int getCol() const { return m_col; };
-
+	const float x() const;
+	const float y() const;
 
 private:
 	sf::Vector2f velocity;
 	int m_lives;
 	int m_id;
-	int m_row;
-	int m_col;
 	bool m_destroyed;
 	bool m_bottom = false;
 	sf::IntRect left;

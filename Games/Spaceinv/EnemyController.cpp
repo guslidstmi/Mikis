@@ -1,13 +1,13 @@
-#include "Enemies.h"
+#include "EnemyController.h"
 #include <iostream>
 #include <stdlib.h>
 
 namespace {
-	unsigned const x_enemy = 90;
-	unsigned const y_enemy = 40;
+	constexpr unsigned int x_enemy = 90;
+	constexpr unsigned int y_enemy = 40;
 };
 
-Enemies::Enemies() : 
+EnemyController::EnemyController() : 
 	m_enemies{}, 
 	m_bums{}, 
 	m_bombs{}
@@ -16,7 +16,7 @@ Enemies::Enemies() :
 	spawnEnemies();
 }
 
-void Enemies::spawnEnemies()
+void EnemyController::spawnEnemies()
 {
 	float x = 0.0f, y = 0.0f;
 	int i, z, id = 1, col = 1;
@@ -43,17 +43,17 @@ void Enemies::spawnEnemies()
 	numberOfAlive = m_enemies.size();
 }
 
-std::vector<Enemy>& Enemies::getEnemies()
+std::vector<Enemy>& EnemyController::getEnemies()
 {
 	return m_enemies;
 }
 
-std::vector<Bomb>& Enemies::getBombs()
+std::vector<Bomb>& EnemyController::getBombs()
 {
 	return m_bombs;
 }
 
-void Enemies::determBottom(int id)
+void EnemyController::determBottom(int id)
 {
 	while (id % 5 != 0)
 	{
@@ -71,7 +71,7 @@ void Enemies::determBottom(int id)
 	}
 }
 
-void Enemies::dropBomb()
+void EnemyController::dropBomb()
 {
 	srand((uint16_t)time(nullptr));
 	int randNum = rand() % 8;

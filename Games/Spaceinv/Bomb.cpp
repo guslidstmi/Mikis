@@ -1,7 +1,7 @@
 #include "Bomb.h"
 
 namespace {
-	float const OffSet = 25.f;
+	constexpr float OffSet = 25.f;
 };
 
 Bomb::Bomb(const float x, const float y) :
@@ -9,7 +9,7 @@ m_bomb{}
 {
 	m_bomb.setPosition(x, y - 5.f);
 	m_bomb.setOrigin(10.f / 2, 20.f / 2);
-	collide = false;
+	m_collide = false;
 }
 
 void Bomb::update(const sf::Texture& texture)
@@ -22,19 +22,19 @@ void Bomb::update(const sf::Texture& texture)
 	m_bomb.move(velocity);
 	if (m_bomb.getPosition().y > 525.f)
 	{
-		collide = true;
+		m_collide = true;
 	}
 }
 
-const bool Bomb::hasCollided()
+const bool Bomb::hasCollided() const
 {
-	return collide;
+	return m_collide;
 }
 
 void Bomb::setCollided()
 {
-	collide = true;
+	m_collide = true;
 }
 
-const float Bomb::x()		{ return m_bomb.getPosition().x; }
-const float Bomb::y()		{ return m_bomb.getPosition().y; }
+const float Bomb::x() const		{ return m_bomb.getPosition().x; }
+const float Bomb::y() const		{ return m_bomb.getPosition().y; }
