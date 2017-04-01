@@ -2,15 +2,14 @@
 #define HEARTS_H_
 
 #include "SFML/Graphics.hpp"
-#include <string>
 
 class Hearts
 {
 public:
 
-	Hearts(int x, int y);
+	Hearts(const float x, const float y);
 	sf::Sprite m_heart;
-	void update(sf::Texture& heart_texture);
+	void update(const sf::Texture& heart_texture);
 
 private:
 

@@ -10,9 +10,7 @@ int main()
 	sf::RectangleShape start;
 	sf::RectangleShape quit;
 	sf::Event event;
-	sf::Font font; 
-	
-	
+	sf::Font font; 	
 
 	if (!font.loadFromFile("Font_Eroded.ttf"))
 	{
@@ -25,12 +23,12 @@ int main()
 	sf::Text congratzText("Congratulations!", font, 30);
 	sf::Text winningText("You beat the Cuties and saved the world!", font, 20);
 
-	startText.setColor(sf::Color(0, 102, 51, 255));
-	quitText.setColor(sf::Color(0, 102, 51, 255));
-	spaceInvText.setColor(sf::Color(0, 102, 51, 255));
-	gameOverText.setColor(sf::Color(0, 102, 51, 255));
-	congratzText.setColor(sf::Color(0, 102, 51, 255));
-	winningText.setColor(sf::Color(0, 102, 51, 255));
+	startText.setFillColor(sf::Color(0, 102, 51, 255));
+	quitText.setFillColor(sf::Color(0, 102, 51, 255));
+	spaceInvText.setFillColor(sf::Color(0, 102, 51, 255));
+	gameOverText.setFillColor(sf::Color(0, 102, 51, 255));
+	congratzText.setFillColor(sf::Color(0, 102, 51, 255));
+	winningText.setFillColor(sf::Color(0, 102, 51, 255));
 
 	startText.setPosition(325, 200);
 	quitText.setPosition(325, 300);
@@ -66,11 +64,11 @@ int main()
 			{
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{
-					if (start.getGlobalBounds().contains(sf::Mouse::getPosition(interface.mWindow).x, sf::Mouse::getPosition(interface.mWindow).y))
+					if (start.getGlobalBounds().contains((float)sf::Mouse::getPosition(interface.mWindow).x, (float)sf::Mouse::getPosition(interface.mWindow).y))
 					{
 						num = 1;
 					}
-					else if (quit.getGlobalBounds().contains(sf::Mouse::getPosition(interface.mWindow).x, sf::Mouse::getPosition(interface.mWindow).y))
+					else if (quit.getGlobalBounds().contains((float)sf::Mouse::getPosition(interface.mWindow).x, (float)sf::Mouse::getPosition(interface.mWindow).y))
 					{
 						interface.mWindow.close();
 					}
@@ -108,7 +106,7 @@ int main()
 			{
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{
-					if (quit.getGlobalBounds().contains(sf::Mouse::getPosition(interface.mWindow).x, sf::Mouse::getPosition(interface.mWindow).y))
+					if (quit.getGlobalBounds().contains((float)sf::Mouse::getPosition(interface.mWindow).x, (float)sf::Mouse::getPosition(interface.mWindow).y))
 					{
 						interface.mWindow.close();
 					}

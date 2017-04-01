@@ -2,7 +2,8 @@
 
 
 Player::Player() :
-	paddle{}, m_hearts{}
+	paddle{}, 
+	m_hearts{}
 {
 	paddle.setPosition(400, 550);
 	paddle.setOrigin(60.f / 2.f, 20.f /2.f);
@@ -11,7 +12,7 @@ Player::Player() :
 
 }
 
-bool Player::update(sf::Texture& texture)
+const bool Player::update(const sf::Texture& texture)
 {
 	++m_timer;
 	if (paddle.getTexture() == NULL)
@@ -47,10 +48,10 @@ bool Player::update(sf::Texture& texture)
 	return false;
 }
 
-float Player::x()		{ return paddle.getPosition().x; }
-float Player::y()		{ return paddle.getPosition().y; }
+const float Player::x()		{ return paddle.getPosition().x; }
+const float Player::y()		{ return paddle.getPosition().y; }
 
-int Player::getLives()
+const int Player::getLives()
 {
 	return m_lives;
 }
@@ -63,12 +64,12 @@ void Player::reduceLives()
 
 void Player::popHearts()
 {
-	int x = 5;
+	float x = 5.f;
 	for (int i = 0; i < 3; ++i)
 	{
-		Hearts heart(x, 5);
+		Hearts heart(x, 5.f);
 		m_hearts.push_back(heart);
-		x += 35;
+		x += 35.f;
 	}
 }
 

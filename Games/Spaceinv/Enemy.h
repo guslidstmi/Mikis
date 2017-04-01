@@ -8,17 +8,17 @@ class Enemy
 {
 public:
 	sf::Sprite m_enemy;
-	Enemy(float x = 0.0, float y = 0.0, int id = 0, int row = 0, int col = 0);
-	bool update(int num, sf::Texture& texture);
-	bool isDestroyed();
-	bool isBottom();
+	Enemy(const float x = 0.0, const float y = 0.0, const int id = 0, const int row = 0, const int col = 0);
+	const bool update(const int num, const sf::Texture& texture);
+	const bool isDestroyed();
+	const bool isBottom();
 	void setDestroyed();
 	void setBottom();
-	int getId();
-	int isDead();
+	const int getId();
+	const int isDead();
 	void setLives();
-	float x();
-	float y();
+	const float x();
+	const float y();
 
 	inline int getCol() const { return m_col; };
 

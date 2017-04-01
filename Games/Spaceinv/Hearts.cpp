@@ -1,7 +1,6 @@
 #include "Hearts.h"
-#include <iostream>
 
-Hearts::Hearts(int x, int y) :
+Hearts::Hearts(const float x, const float y) :
 	m_heart{}
 {
 	m_heart.setPosition(sf::Vector2f(x, y));
@@ -9,9 +8,9 @@ Hearts::Hearts(int x, int y) :
 	state = 0;
 }
 
-void Hearts::update(sf::Texture& heart_texture)
+void Hearts::update(const sf::Texture& heart_texture)
 {
-	if(m_heart.getTexture() == NULL)
+	if(m_heart.getTexture() == nullptr)
 	{
 		m_heart.setTexture(heart_texture);
 		m_heart.setTextureRect(sf::IntRect(0, 0, 30, 30));
@@ -35,5 +34,4 @@ void Hearts::update(sf::Texture& heart_texture)
 		m_heart.setTextureRect(sf::IntRect(0, 0, 30, 30));
 		break;
 	}
-	
 }

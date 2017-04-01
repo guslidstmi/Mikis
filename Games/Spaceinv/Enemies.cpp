@@ -2,11 +2,15 @@
 #include <iostream>
 #include <stdlib.h>
 
-#define x_enemy 90
-#define y_enemy 40
+namespace {
+	unsigned const x_enemy = 90;
+	unsigned const y_enemy = 40;
+};
 
 Enemies::Enemies() : 
-	m_enemies{}, m_bums{}, m_bombs{}
+	m_enemies{}, 
+	m_bums{}, 
+	m_bombs{}
 {
 	numberOfAlive = 0;
 	spawnEnemies();
@@ -58,7 +62,7 @@ void Enemies::determBottom(int id)
 	// correcting id because id and index does not match.
     for (int i = id - 1; i > id - 6; --i)
 	{
-                if (!m_enemies[i].isDestroyed())
+        if (!m_enemies[i].isDestroyed())
 		{
 			m_enemies[i].setBottom();
           	m_bums.at(m_enemies[i].getCol() - 1) = m_enemies[i].getId();
@@ -69,7 +73,7 @@ void Enemies::determBottom(int id)
 
 void Enemies::dropBomb()
 {
-	srand(time(NULL));
+	srand((uint16_t)time(nullptr));
 	int randNum = rand() % 8;
 
 	if (!m_enemies[m_bums[randNum] - 1].isDestroyed())

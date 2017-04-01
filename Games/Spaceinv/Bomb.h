@@ -8,13 +8,13 @@
 class Bomb
 {
 public:
-	Bomb(float x, float y);
-	void update(sf::Texture& texture);
+	Bomb(const float x, const float y);
+	void update(const sf::Texture& texture);
 	sf::Sprite m_bomb;
-	bool hasCollided();
+	const bool hasCollided();
 	void setCollided();
-	float y();
-	float x();
+	const float y();
+	const float x();
 
 private:
 	sf::Vector2f velocity;

@@ -8,11 +8,11 @@ class Player
 {
 public:
 	Player();
-	bool update(sf::Texture& texture);
+	const bool update(const sf::Texture& texture);
 	sf::Sprite paddle;
-	float y();
-	float x();
-	int getLives();
+	const float y();
+	const float x();
+	const int getLives();
 	void reduceLives();
 	void popHearts();
 	std::vector<Hearts>& getHearts();

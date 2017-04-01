@@ -7,7 +7,10 @@ class Bullet;
 class Player;
 class Enemies;
 
-World::World() : m_player{}, m_bullets{}, m_enemies{}
+World::World() : 
+	m_player{}, 
+	m_bullets{}, 
+	m_enemies{}
 {
 	
 	Enemies enem{};
@@ -19,7 +22,7 @@ World::World() : m_player{}, m_bullets{}, m_enemies{}
 	}
 }
 
-int World::update(Interface& window)
+const int World::update(Interface& window)
 {
 	if(gameOver)
 	{
@@ -96,7 +99,7 @@ void World::drawBombs(Interface& window)
 	}
 }
 
-bool hasCollided(Bullet& b) 
+const bool hasCollided(Bullet& b) 
 {
 	return b.hasCollided();
 }
@@ -106,7 +109,7 @@ void World::deleteBullets()
 	m_bullets.erase(std::remove_if(std::begin(m_bullets), std::end(m_bullets), hasCollided), std::end(m_bullets));
 }
 
-bool bombHasCollided(Bomb& b)
+const bool bombHasCollided(Bomb& b)
 {
 	return b.hasCollided();
 }
@@ -138,6 +141,7 @@ void World::drawEnemies(Interface& window)
 
 void World::checkCollision() 
 {
+	// TODO: Change so that each bullet does not have to check if they have hit each enemy.
 	for(auto& bullet : m_bullets)
 	{
 		bulletBox = bullet.m_bulletRect.getGlobalBounds();

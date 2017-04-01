@@ -11,7 +11,7 @@ class World
 {
 public:
 	World();
-	int update(Interface& window);
+	const int update(Interface& window);
 	void spawnBullet();
 	void drawBullets(Interface& window);
 	void drawEnemies(Interface& window);
@@ -19,7 +19,6 @@ public:
 	void deleteBullets();
 	void deleteBombs();
 	void checkCollision();
-	void determineBottom(int id);
 
 
 private:
