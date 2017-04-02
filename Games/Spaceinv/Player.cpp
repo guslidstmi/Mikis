@@ -1,15 +1,15 @@
 #include "Player.h"
 
 
-Player::Player() :
-	paddle{}, 
-	m_hearts{}
+Player::Player() 
+	: paddle{}
+	, m_hearts{}
+	, m_lives{3}
+	, m_timer{0}
 {
 	paddle.setPosition(400, 550);
 	paddle.setOrigin(60.f / 2.f, 20.f /2.f);
-	m_lives = 3;
 	popHearts();
-
 }
 
 const bool Player::update(const sf::Texture& texture)
@@ -38,22 +38,20 @@ const bool Player::update(const sf::Texture& texture)
 
 	paddle.move(velocity);
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) 
-		&& !paddle.getGlobalBounds().contains(5, 550)) velocity.x = -10.f;
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)
-		&& !paddle.getGlobalBounds().contains(790, 550)) velocity.x = 10.f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)
+		&& !paddle.getGlobalBounds().contains(5, 550))
+	{
+		velocity.x = -10.f;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)
+		&& !paddle.getGlobalBounds().contains(790, 550))
+	{
+		velocity.x = 10.f;
+	}
 	else
 		velocity.x = 0;
 
 	return false;
-}
-
-const float Player::x()		{ return paddle.getPosition().x; }
-const float Player::y()		{ return paddle.getPosition().y; }
-
-const int Player::getLives()
-{
-	return m_lives;
 }
 
 void Player::reduceLives()
@@ -71,9 +69,4 @@ void Player::popHearts()
 		m_hearts.push_back(heart);
 		x += 35.f;
 	}
-}
-
-std::vector<Hearts>& Player::getHearts()
-{
-	return m_hearts;
 }

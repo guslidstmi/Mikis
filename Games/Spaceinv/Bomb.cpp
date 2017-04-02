@@ -4,8 +4,8 @@ namespace {
 	constexpr float OffSet = 25.f;
 };
 
-Bomb::Bomb(const float x, const float y) :
-m_bomb{}
+Bomb::Bomb(const float x, const float y) 
+	: m_bomb{}
 {
 	m_bomb.setPosition(x, y - 5.f);
 	m_bomb.setOrigin(10.f / 2, 20.f / 2);
@@ -25,16 +25,3 @@ void Bomb::update(const sf::Texture& texture)
 		m_collide = true;
 	}
 }
-
-const bool Bomb::hasCollided() const
-{
-	return m_collide;
-}
-
-void Bomb::setCollided()
-{
-	m_collide = true;
-}
-
-const float Bomb::x() const		{ return m_bomb.getPosition().x; }
-const float Bomb::y() const		{ return m_bomb.getPosition().y; }

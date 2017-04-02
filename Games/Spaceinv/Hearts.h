@@ -6,16 +6,12 @@
 class Hearts
 {
 public:
-
 	Hearts(const float x, const float y);
-	sf::Sprite m_heart;
 	void update(const sf::Texture& heart_texture);
+	sf::Sprite m_heart;
 
 private:
-
 	int timer;
 	int state;
 };
-
-
 #endif // HEARTS_H_

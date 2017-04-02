@@ -15,9 +15,7 @@ public:
 	Interface();
 	sf::RenderWindow mWindow;
 	sf::Texture background;
-	sf::Sprite backgroundSprite;
-private:
-	
+	sf::Sprite backgroundSprite;	
 };
 
 #endif // INTERFACE_H_

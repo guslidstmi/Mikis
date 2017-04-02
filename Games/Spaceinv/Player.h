@@ -9,19 +9,19 @@ class Player
 public:
 	Player();
 	const bool update(const sf::Texture& texture);
-	sf::Sprite paddle;
-	const float y();
-	const float x();
-	const int getLives();
 	void reduceLives();
 	void popHearts();
-	std::vector<Hearts>& getHearts();
+	sf::Sprite paddle;
+
+	inline std::vector<Hearts>& Player::getHearts()	{ return m_hearts; }
+	inline const int Player::getLives() const { return m_lives; }
+	inline const float Player::x() const { return paddle.getPosition().x; }
+	inline const float Player::y() const { return paddle.getPosition().y; }
 
 private:
 	sf::Vector2f velocity;
-	int m_lives;
 	std::vector<Hearts> m_hearts;
-	int m_timer = 0;
+	int m_lives;
+	int m_timer;
 };
-
 #endif // PLAYER_H_

@@ -1,18 +1,21 @@
 #include "Enemy.h"
 
-Enemy::Enemy(float x, float y, int id) : 
-	m_enemy{}, 
-	left{ 0, 0, 25, 25 }, 
-	front{28, 0, 25, 25}, 
-	right{52, 0, 25, 25}, 
-	explo1{75, 0, 25, 25}, 
-	explo2{100, 0, 25, 25}, 
-	explo3{125, 0, 25, 25}
+Enemy::Enemy(const float x, const float y, const int id, const int row, const int col) 
+	: m_enemy{}
+	, left{ 0, 0, 25, 25 }
+	, front{28, 0, 25, 25} 
+	, right{52, 0, 25, 25}
+	, explo1{75, 0, 25, 25} 
+	, explo2{100, 0, 25, 25}
+	, explo3{125, 0, 25, 25}
+	, m_id{ id }
+	, m_row{ row }
+	, m_col{ col }
+	, m_lives{ 3 }
+	, m_destroyed{ false }
+	, m_bottom{ false }
 {
 	m_enemy.setPosition(x, y);
-	m_id = id;
-	m_lives = 3;
-	m_destroyed = false;
 }
 
 const bool Enemy::update(const int num, const sf::Texture& texture)
@@ -105,41 +108,3 @@ const bool Enemy::update(const int num, const sf::Texture& texture)
 	}
 	return false;
 }
-
-const bool Enemy::isDestroyed() const
-{
-	return m_destroyed;
-}
-
-const bool Enemy::isBottom() const
-{
-	return m_bottom;
-}
-
-void Enemy::setDestroyed() 
-{
-	m_destroyed = true;
-}
-
-void Enemy::setBottom()
-{
-	m_bottom = true;
-}
-
-const int Enemy::getId() const
-{
-	return m_id;
-}
-
-const int Enemy::isDead() const
-{
-	return m_lives;
-}
-
-void Enemy::setLives() 
-{
-	--m_lives;
-}
-
-const float Enemy::x() const	{ return m_enemy.getPosition().x; }
-const float Enemy::y() const	{ return m_enemy.getPosition().y; }

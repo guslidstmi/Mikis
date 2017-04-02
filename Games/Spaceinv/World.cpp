@@ -15,6 +15,7 @@ World::World()
 	, m_movetimer{ 0 }
 	, m_bombtimer{ 0 }
 	, m_bombtimer2{ 0 }
+	, state{ State::starting }
 {
 	if (!m_heart_texture.loadFromFile("Sprites/Heart.png") || !m_enemy_texture.loadFromFile("Sprites/Enemies_full.png") || 
 		!m_bomb_texture.loadFromFile("Sprites/Bomb.png") || !m_player_texture.loadFromFile("Sprites/Player_canon.png"))
@@ -23,15 +24,15 @@ World::World()
 	}
 }
 
-const int World::update(Interface& window)
+World::State World::update(Interface& window)
 {
 	if(m_gameOver)
 	{
-		return 2;
+		return State::endLose;
 	}
-	else if (m_enemyController.numberOfAlive == 0)
+	else if (m_enemyController.getNumberOfAlive() == 0)
 	{
-		return 3;
+		return State::endWin;
 	}
 	++m_timer;
 	++m_enemytimer;
@@ -61,23 +62,21 @@ const int World::update(Interface& window)
 	drawBullets(window);
 	drawBombs(window);
 
-	return 1;
+	return State::play;
 }
 
 void World::spawnBullet() 
 {
-
 	Bullet bullet(m_player.paddle.getPosition().x, m_player.paddle.getPosition().y);
 	m_bullets.push_back(bullet);
-
 }
 
 void World::drawBullets(Interface& window) 
 {
-	for (auto& x : m_bullets)
+	for (auto& bullet : m_bullets)
 	{
-		x.update();
-		window.mWindow.draw(x.m_bulletRect);
+		bullet.update();
+		window.mWindow.draw(bullet.m_bulletRect);
 	}
 	deleteBullets();
 }
@@ -117,19 +116,20 @@ const bool bombHasCollided(Bomb& b)
 
 void World::deleteBombs()
 {
-	m_enemyController.getBombs().erase(std::remove_if(std::begin(m_enemyController.getBombs()), std::end(m_enemyController.getBombs()), bombHasCollided), std::end(m_enemyController.getBombs()));
+	m_enemyController.getBombs().erase(std::remove_if(std::begin(m_enemyController.getBombs()), 
+		std::end(m_enemyController.getBombs()), bombHasCollided), std::end(m_enemyController.getBombs()));
 }
 
 void World::drawEnemies(Interface& window) 
 {
-	for (auto& x : m_enemyController.getEnemies())
+	for (auto& enemy : m_enemyController.getEnemies())
 	{
 		if(m_enemytimer % 40 == 0)
 		{
-			m_gameOver = x.update(m_movetimer, m_enemy_texture);
+			m_gameOver = enemy.update(m_movetimer, m_enemy_texture);
 		}
-		if (!x.isDestroyed())
-		window.mWindow.draw(x.m_enemy);
+		if (!enemy.isDestroyed())
+		window.mWindow.draw(enemy.m_enemy);
 	}
 	if (m_enemytimer % 40 == 0)
 	{
@@ -137,7 +137,6 @@ void World::drawEnemies(Interface& window)
 			m_movetimer = 0;
 		else ++m_movetimer;
 	}
-
 }
 
 void World::checkCollision() 
@@ -154,15 +153,13 @@ void World::checkCollision()
 				// Check if bullet and enemy has collided, i.e. their x and y position intersect.
 				if (m_bulletBox.intersects(m_enemyBox))
 				{
-					// check if enemy only has one life left, then it's destroyed
  					if (enemy.isDead() == 1)
 					{
-						--m_enemyController.numberOfAlive;
+						m_enemyController.decrementNumOfAlive();
 						enemy.setDestroyed();
  						m_enemyController.determBottom(enemy.getId());
 						bullet.setCollided();
 					}
-					// if not destroyed, remove one life.
 					else
 					{
 						enemy.setLives();

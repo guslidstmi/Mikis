@@ -9,17 +9,20 @@ class EnemyController
 {
 public:
 	EnemyController();
-	std::vector<Enemy>& getEnemies();
-	std::vector<Bomb>& getBombs();
 	void dropBomb();
 	void determBottom(int id);
-	int numberOfAlive;
+
+	inline int getNumberOfAlive() { return numberOfAlive; }
+	inline void decrementNumOfAlive() { --numberOfAlive; }
+	inline std::vector<Enemy>& EnemyController::getEnemies() { return m_enemies; }
+	inline std::vector<Bomb>& EnemyController::getBombs() { return m_bombs;	}
 
 private:
 	std::vector<Enemy> m_enemies;
-	std::vector<int> m_bums;
+	std::vector<int> m_bottomEnemies;
 	std::vector<Bomb> m_bombs;
 	void spawnEnemies();
+	int numberOfAlive;
 
 };
 

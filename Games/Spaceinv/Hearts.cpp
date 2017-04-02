@@ -1,11 +1,11 @@
 #include "Hearts.h"
 
-Hearts::Hearts(const float x, const float y) :
-	m_heart{}
+Hearts::Hearts(const float x, const float y)
+	: m_heart{}
+	, timer{0}
+	, state{0}
 {
 	m_heart.setPosition(sf::Vector2f(x, y));
-	timer = 0;
-	state = 0;
 }
 
 void Hearts::update(const sf::Texture& heart_texture)
@@ -18,7 +18,7 @@ void Hearts::update(const sf::Texture& heart_texture)
 	++timer;
 	if (timer == 60)
 	{
-		state = 1;	
+		state = 1;
 	}
 	else if (timer == 120)
 	{

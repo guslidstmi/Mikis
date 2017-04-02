@@ -4,8 +4,8 @@ namespace {
 	constexpr float OffSet = 10.f;
 };
 
-Bullet::Bullet(const float x, const float y) : 
-	m_bulletRect{}
+Bullet::Bullet(const float x, const float y) 
+	: m_bulletRect{}
 {
 	m_bulletRect.setRadius(3.f);
 	m_bulletRect.setFillColor(sf::Color::Yellow);
@@ -22,18 +22,4 @@ void Bullet::update()
 	{
 		collide = true;
 	}
-
 }
-
-const bool Bullet::hasCollided() const
-{
-	return collide;
-}
-
-void Bullet::setCollided() 
-{
-	collide = true;
-}
-
-const float Bullet::x()	const	{ return m_bulletRect.getPosition().x; }
-const float Bullet::y() const	{ return m_bulletRect.getPosition().y; }

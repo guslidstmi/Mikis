@@ -12,7 +12,8 @@ class World
 {
 public:
 	World();
-	const int update(Interface& window);
+	enum class State { starting, play, endLose, endWin };
+	World::State update(Interface& window);
 	void spawnBullet();
 	void drawBullets(Interface& window);
 	void drawEnemies(Interface& window);
@@ -20,6 +21,7 @@ public:
 	void deleteBullets();
 	void deleteBombs();
 	void checkCollision();
+	State state;
 
 
 private:

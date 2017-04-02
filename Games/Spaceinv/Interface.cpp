@@ -1,8 +1,8 @@
 #include "Interface.h"
 #include <iostream>
 
-Interface::Interface() :
-mWindow{ { windowWidth, windowHeight }, "Space Invaders - Game" }
+Interface::Interface() 
+	: mWindow{ { windowWidth, windowHeight }, "Space Invaders - Game" }
 {
 	mWindow.setFramerateLimit(60);
 	if(!background.loadFromFile("sky.jpg"))
@@ -10,5 +10,5 @@ mWindow{ { windowWidth, windowHeight }, "Space Invaders - Game" }
 		std::cout << "Could not load background" << std::endl;
 	}
 	backgroundSprite.setTexture(background);
-	backgroundSprite.setPosition(sf::Vector2f(0.f, 0.f));
+	backgroundSprite.setPosition(sf::Vector2f(0.0f, 0.0f));
 }

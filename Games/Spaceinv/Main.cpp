@@ -6,7 +6,6 @@ int main()
 {
 	Interface interface{};
 	World world{};
-	int num = 0;
 	sf::RectangleShape start;
 	sf::RectangleShape quit;
 	sf::Event event;
@@ -46,9 +45,9 @@ int main()
 
 	while (interface.mWindow.isOpen())
 	{
-		switch (num)
+		switch (world.state)
 		{
-		case 0 :
+		case World::State::starting :
 
 			interface.mWindow.clear(sf::Color::Black);
 			interface.mWindow.draw(interface.backgroundSprite);
@@ -66,7 +65,7 @@ int main()
 				{
 					if (start.getGlobalBounds().contains((float)sf::Mouse::getPosition(interface.mWindow).x, (float)sf::Mouse::getPosition(interface.mWindow).y))
 					{
-						num = 1;
+						world.state = World::State::play;
 					}
 					else if (quit.getGlobalBounds().contains((float)sf::Mouse::getPosition(interface.mWindow).x, (float)sf::Mouse::getPosition(interface.mWindow).y))
 					{
@@ -80,7 +79,7 @@ int main()
 			interface.mWindow.display();
 			break;
 
-		case 1 :
+		case World::State::play :
 			
 			interface.mWindow.clear(sf::Color::Black);
 			interface.mWindow.draw(interface.backgroundSprite);
@@ -89,12 +88,12 @@ int main()
 			if (event.type == sf::Event::Closed)
 			interface.mWindow.close();
 
-			num = world.update(interface);
+			world.state = world.update(interface);
 
 			interface.mWindow.display();
 			break;
 
-		case 2 :
+		case World::State::endLose :
 			interface.mWindow.clear(sf::Color::Black);
 			interface.mWindow.draw(interface.backgroundSprite);
 			interface.mWindow.draw(gameOverText);
@@ -118,7 +117,7 @@ int main()
 			interface.mWindow.display();
 			break;
 
-		case 3 :
+		case World::State::endWin:
 			interface.mWindow.clear(sf::Color::Black);
 			interface.mWindow.draw(interface.backgroundSprite);
 			interface.mWindow.draw(congratzText);
