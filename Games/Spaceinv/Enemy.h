@@ -6,11 +6,11 @@
 class Enemy
 {
 public:
-	Enemy(const float x = 0.0f, const float y = 0.0f, const int id = 0, int row = 0, int col = 0);
+	Enemy(const float x = 0.0f, const float y = 0.0f, const int id = 0, const int row = 0, const int col = 0);
 	const bool update(const int num, const sf::Texture& texture);
 	sf::Sprite m_enemy;
 
-	inline int getCol() const { return m_col; };
+	inline const int getCol() const { return m_col; };
 	inline const bool Enemy::isDestroyed() const { return m_destroyed; }
 	inline const bool Enemy::isBottom() const { return m_bottom; }
 	inline void Enemy::setDestroyed() { m_destroyed = true; }

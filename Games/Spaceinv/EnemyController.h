@@ -23,7 +23,6 @@ private:
 	std::vector<Bomb> m_bombs;
 	void spawnEnemies();
 	int numberOfAlive;
-
 };
 
 #endif
