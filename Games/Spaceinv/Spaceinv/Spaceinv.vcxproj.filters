@@ -33,13 +33,13 @@
     <ClCompile Include="..\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Enemies.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Bomb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Hearts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EnemyController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,13 +59,13 @@
     <ClInclude Include="..\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Enemies.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Bomb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Hearts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EnemyController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

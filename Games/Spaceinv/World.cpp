@@ -22,6 +22,13 @@ World::World()
 	{
 		std::cout << "could not load texture" << std::endl;
 	}
+	{
+		std::cout << "could not load sound files" << std::endl;
+	}
+	else
+	{
+		bulletSound.setBuffer(buffer);
+	}
 }
 
 World::State World::update(Interface& window)
@@ -69,6 +76,7 @@ void World::spawnBullet()
 {
 	Bullet bullet(m_player.paddle.getPosition().x, m_player.paddle.getPosition().y);
 	m_bullets.push_back(bullet);
+	bulletSound.play();
 }
 
 void World::drawBullets(Interface& window) 

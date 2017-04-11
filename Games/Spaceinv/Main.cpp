@@ -10,10 +10,18 @@ int main()
 	sf::RectangleShape quit;
 	sf::Event event;
 	sf::Font font; 	
+	sf::Music music;
+
+	if (!music.openFromFile("Sprites/music.ogg"))
+	{
+		std::cout << "could not load music\n";
+	}
+	music.setLoop(true);
+	music.play();
 
 	if (!font.loadFromFile("Font_Eroded.ttf"))
 	{
-		std::cout << "could not load font" << std::endl;
+		std::cout << "could not load font\n";
 	}
 	sf::Text startText("Start", font, 30);
 	sf::Text quitText("Quit", font, 30);

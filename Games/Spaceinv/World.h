@@ -2,6 +2,7 @@
 #define WORLD_H_
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Bullet.h"
 #include "EnemyController.h"
 #include "Player.h"
@@ -43,6 +44,8 @@ private:
 	sf::Texture m_enemy_texture;
 	sf::Texture m_bomb_texture;
 	sf::Texture m_player_texture;
+	sf::SoundBuffer buffer;
+	sf::Sound bulletSound;
 };
 
 #endif // WORLD_H_
