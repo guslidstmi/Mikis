@@ -22,6 +22,7 @@ World::World()
 	{
 		std::cout << "could not load texture" << std::endl;
 	}
+	if (!buffer.loadFromFile("Sprites/shot.wav"))
 	{
 		std::cout << "could not load sound files" << std::endl;
 	}
