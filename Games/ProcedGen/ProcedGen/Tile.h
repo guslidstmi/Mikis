@@ -3,9 +3,17 @@
 
 class Tile
 {
-public :
-	Tile();
-	Tile(float x, float y, int colour);
+public:
+	enum class Tiletype {
+		LAND,
+		FORREST,
+		BEACH,
+		SHALLOWWATER,
+		WATER,
+		MOUNTAIN
+	};
+
+	Tile(float x, float y, Tiletype colour);
 	sf::RectangleShape& m_getRect();
 
 private:

@@ -18,9 +18,8 @@ std::vector<City>& Map::getCities()
 
 void Map::generateMap()
 {
-	Perlin perlin(200, 200);
-	perlin.perlin();
-	std::cout << perlin.getGridValueByIndex(1,1);
+	Perlin perlin(gridSize, gridSize);
+
 	float x = 0.f, y = 0.f;
 	double noiseValue = 0.0;
 	int id = 0;
@@ -28,17 +27,38 @@ void Map::generateMap()
 	{
 		for (int j = 0; j < gridSize; ++j)
 		{
-			noiseValue = perlin.getGridValueByIndex(i, j);
-			if ( noiseValue < 0.2)
+			noiseValue = perlin.generatePerlin(i, j, 0.8, 12, 0.5);
+			if ( noiseValue < 0.39)
 			{
-				grid[i][j] = 3;
-				environment.push_back(Tile(x, y, 3));
+				grid[i][j] = 1;
+				environment.push_back(Tile(x, y, Tile::Tiletype::WATER));
 			}
-			else
+			else if (noiseValue < 0.44)
 			{
 				grid[i][j] = 2;
-				environment.push_back(Tile(x, y, 2));
+				environment.push_back(Tile(x, y, Tile::Tiletype::SHALLOWWATER));
 			}
+			else if (noiseValue < 0.45)
+			{
+				grid[i][j] = 3;
+				environment.push_back(Tile(x, y, Tile::Tiletype::BEACH));
+			}
+			else if(noiseValue < 0.59)
+			{
+				grid[i][j] = 4;
+				environment.push_back(Tile(x, y, Tile::Tiletype::LAND));
+			}
+			else if (noiseValue < 0.65)
+			{
+				grid[i][j] = 5;
+				environment.push_back(Tile(x, y, Tile::Tiletype::FORREST));
+			}
+			else if (noiseValue > 0.65)
+			{
+				grid[i][j] = 6;
+				environment.push_back(Tile(x, y, Tile::Tiletype::MOUNTAIN));
+			}
+			
 			y += 3.f;
 		}
 		y = 0.f;
@@ -48,16 +68,15 @@ void Map::generateMap()
 
 bool Map::nearbyCity(int i, int j, int grid[200][200])
 {
-	if (grid[i - 1][j] == 1 || grid[i - 1][j - 1] == 1 || grid[i - 1][j + 1] == 1 ||
-		grid[i + 1][j] == 1 || grid[i + 1][j - 1] == 1 || grid[i + 1][j + 1] == 1 ||
-		grid[i][j - 1] == 1 || grid[i][j + 1] == 1 ||
-		grid[i - 2][j] == 1 || grid[i - 2][j - 2] == 1 || grid[i - 2][j + 2] == 1 ||
-		grid[i + 2][j] == 1 || grid[i + 2][j - 2] == 1 || grid[i + 2][j + 2] == 1 ||
-		grid[i][j - 2] == 1 || grid[i][j + 2] == 1)
+	if (grid[i - 1][j] == 0 || grid[i - 1][j - 1] == 0 || grid[i - 1][j + 1] == 0 ||
+		grid[i + 1][j] == 0 || grid[i + 1][j - 1] == 0 || grid[i + 1][j + 1] == 0 ||
+		grid[i][j - 1] == 0 || grid[i][j + 1] == 0 ||
+		grid[i - 2][j] == 0 || grid[i - 2][j - 2] == 0 || grid[i - 2][j + 2] == 0 ||
+		grid[i + 2][j] == 0 || grid[i + 2][j - 2] == 0 || grid[i + 2][j + 2] == 0 ||
+		grid[i][j - 2] == 0 || grid[i][j + 2] == 0)
 	{
 		return true;
 	}
-
 	return false;
 }
 
@@ -73,10 +92,11 @@ void Map::generateCities()
 	{
 		for (int j = 0; j < gridSize; ++j)
 		{
-			int num = distribution(generator);
-			if (num < 0.5 && !nearbyCity(i, j, grid))
+			double num = distribution(generator);
+			if (num < 0.1 && !nearbyCity(i, j, grid) && grid[i][j] == 4)
 			{
-				grid[i][j] = 1;
+
+				grid[i][j] = 5;
 				cities.push_back(City(x, y, id));
 				++id;
 			}
@@ -91,7 +111,7 @@ void Map::placeCity(const int x, const int y)
 {
 	int i = x / 4;
 	int j = y / 3;
-	grid[i][j] = 1;
+	grid[i][j] = 0;
 	cities.push_back(City((float)(i*4), (float)(j*3), 0));
 	generateCities();
 }

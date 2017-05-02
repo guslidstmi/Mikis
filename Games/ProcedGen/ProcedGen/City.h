@@ -2,7 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Tile.h"
 
-class City : public Tile
+class City
 {
 public :
 	City(const float x, const float y, const int id);

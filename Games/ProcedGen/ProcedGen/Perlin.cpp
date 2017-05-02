@@ -3,68 +3,77 @@
 Perlin::Perlin(int height, int width) :
 	m_height{ height }
 	, m_width{ width }
-{}
-
-void Perlin::perlin()
 {
-	generateNoise();
-	for ( int y = 0; y < m_height; ++y )
-	{
-		for ( int x = 0; x < m_width; ++x )
-		{
-			m_grid[x][y] = turbulence( x, y, 16 ) / 4;
-		}
-	}
-}
-
-void Perlin::generateNoise()
-{
+	m_permutation.resize(256);
 	std::random_device rd;
-	std::default_random_engine generator( rd() );
-	std::normal_distribution<double> distribution( 0.5, 0.5 );
+	std::default_random_engine generator(rd());
+	std::iota(m_permutation.begin(), m_permutation.end(), 0);
 
-	for ( int y = 0; y < m_height; ++y )
-	{
-		for ( int x = 0; x < m_width; ++x )
-		{
-			m_grid[y][x] = distribution( generator );
-		}
+	std::shuffle(m_permutation.begin(), m_permutation.end(), generator);
+
+	m_permutation.insert(m_permutation.end(), m_permutation.begin(), m_permutation.end());
+}
+
+double Perlin::noise(double x, double y, double z)
+{
+	int newX = (int)floor(x) & 255;
+	int newY = (int)floor(y) & 255;
+	int newZ = (int)floor(z) & 255;
+
+	x -= floor(x);
+	y -= floor(y);
+	z -= floor(z);
+
+	double u = fade(x);
+	double v = fade(y);
+	double w = fade(z);
+
+	int a = m_permutation[newX] + newY;
+	int aa = m_permutation[a] + newZ;
+	int ab = m_permutation[a + 1] + newZ;
+	int b = m_permutation[newX + 1] + newY;
+	int ba = m_permutation[b] + newZ;
+	int bb = m_permutation[b + 1] + newZ;
+
+	double result = interpolation(w, interpolation(v, interpolation(u, gradient(m_permutation[aa], x, y, z), gradient(m_permutation[ba], x - 1, y, z)), 
+		interpolation(u, gradient(m_permutation[ab], x, y - 1, z), gradient(m_permutation[bb], x - 1, y - 1, z))), 
+		interpolation(v, interpolation(u, gradient(m_permutation[aa + 1], x, y, z - 1), gradient(m_permutation[ba + 1], x - 1, y, z - 1)), 
+		interpolation(u, gradient(m_permutation[ab + 1], x, y - 1, z - 1), gradient(m_permutation[bb + 1], x - 1, y - 1, z - 1))));
+
+	return (result + 1.0)/2.0;
+}
+
+double Perlin::fade(double t) {
+	// f(t) = 6t^5 - 15t^4 + 10t^3
+	return t * t * t * (t * (t * 6 - 15) + 10); 
+}
+
+double Perlin::interpolation(double t, double a, double b) {
+	return a + t * (b - a);
+}
+
+double Perlin::gradient(int hash, double x, double y, double z) {
+	int h = hash & 15;
+	// Convert lower 4 bits of hash into 12 gradient directions
+	double u = h < 8 ? x : y,
+		v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+	return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+}
+
+double Perlin::generatePerlin(double x, double y, double z, int octaves, double persistence) {
+	double total = 0.0;
+	double frequency = 0.01;
+	double amplitude = 1.0;
+	double maxValue = 0.0;  // Used for normalizing result to 0.0 - 1.0
+	for (int i = 0; i<octaves; i++) {
+		total += noise(x * frequency, y * frequency, z * frequency) * amplitude;
+
+		maxValue += amplitude;
+
+		amplitude *= persistence;
+		frequency *= 2;
 	}
+
+	return total / maxValue;
 }
 
-double Perlin::smoothNoise(double x, double y)
-{
-	double fractX = x - int( x );
-	double fractY = y - int( y );
-
-	int x1 = ( int( x ) + m_width ) % m_width;
-	int y1 = ( int( y ) + m_height ) % m_height;
-
-	int x2 = ( x1 + m_width - 1 ) % m_width;
-	int y2 = ( y1 + m_height - 1 ) % m_height;
-
-	double value = 0.0;
-	value += fractX * fractY * m_grid[y1][x1];
-	value += ( 1 - fractX ) * fractY * m_grid[y1][x2];
-	value += fractX * ( 1 - fractY ) * m_grid[y2][x1];
-	value += ( 1 - fractX ) * ( 1 - fractY ) * m_grid[y2][x2];
-
-	return value;
-}
-
-double Perlin::turbulence(double x, double y, double size)
-{
-	double value = 0.0, initialSize = size;
-	
-	while ( size >= 1 )
-	{
-		value += smoothNoise( x / size, y / size ) * size;
-		size /= 2.0;
-	}
-	return (value/initialSize);
-}
-
-double Perlin::getGridValueByIndex(int x, int y)
-{
-	return m_grid[x][y];
-}
