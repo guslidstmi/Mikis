@@ -1,27 +1,29 @@
 #include "City.h"
 
-City::City(const float x, const float y, const int id) :
-	m_Id{ id },
-m_cityRect{}
+City::City(const float x, const float y, const int id, const sf::Texture& cityTexture) :
+	m_Id{ id }
+	, m_neighbourCity{0, 0, 16, 15}
+	, m_playerCity{0, 15, 16, 15}
+	, m_City{}
 {
-	m_cityRect.setSize(sf::Vector2f(10.0, 10.0));
-	m_cityRect.setPosition(x, y);
+	m_City.setTexture(cityTexture);
+	m_City.setPosition(x, y);
 	if (id > 0)
 	{
-		m_cityRect.setFillColor(sf::Color::Red);
+		m_City.setTextureRect(m_neighbourCity);
 	}
 	else
 	{
-		m_cityRect.setFillColor(sf::Color::Magenta);
+		m_City.setTextureRect(m_playerCity);
 	}
 }
 
-const int City::m_getCityId()
+const int City::m_getCityId() const
 {
 	return m_Id;
 }
 
-sf::RectangleShape& City::m_getRect()
+sf::Sprite& City::m_getRect()
 {
-	return m_cityRect;
+	return m_City;
 }

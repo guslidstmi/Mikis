@@ -43,16 +43,19 @@ double Perlin::noise(double x, double y, double z)
 	return (result + 1.0)/2.0;
 }
 
-double Perlin::fade(double t) {
+double Perlin::fade(double t) 
+{
 	// f(t) = 6t^5 - 15t^4 + 10t^3
 	return t * t * t * (t * (t * 6 - 15) + 10); 
 }
 
-double Perlin::interpolation(double t, double a, double b) {
+double Perlin::interpolation(double t, double a, double b) 
+{
 	return a + t * (b - a);
 }
 
-double Perlin::gradient(int hash, double x, double y, double z) {
+double Perlin::gradient(int hash, double x, double y, double z) 
+{
 	int h = hash & 15;
 	// Convert lower 4 bits of hash into 12 gradient directions
 	double u = h < 8 ? x : y,
@@ -60,9 +63,10 @@ double Perlin::gradient(int hash, double x, double y, double z) {
 	return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 }
 
-double Perlin::generatePerlin(double x, double y, double z, int octaves, double persistence) {
+double Perlin::generatePerlin(double x, double y, double z, int octaves, double persistence) 
+{
 	double total = 0.0;
-	double frequency = 0.01;
+	double frequency = 0.007;
 	double amplitude = 1.0;
 	double maxValue = 0.0;  // Used for normalizing result to 0.0 - 1.0
 	for (int i = 0; i<octaves; i++) {

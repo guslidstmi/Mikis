@@ -5,11 +5,13 @@
 class City
 {
 public :
-	City(const float x, const float y, const int id);
-	const int m_getCityId();
-	sf::RectangleShape& m_getRect();
+	City(const float x, const float y, const int id, const sf::Texture& cityTexture);
+	const int m_getCityId() const;
+	sf::Sprite& m_getRect();
 
 private :
-	sf::RectangleShape m_cityRect;
+	sf::Sprite m_City;
+	sf::IntRect m_playerCity;
+	sf::IntRect m_neighbourCity;
 	const int m_Id;
 };

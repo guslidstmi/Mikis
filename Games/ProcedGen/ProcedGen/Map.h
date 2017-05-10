@@ -14,12 +14,13 @@ public:
 
 private:
 	void generateMap();
-	bool nearbyCity(int i, int j, int grid[200][200]);
-	void generateCities();
+	bool nearbyCity(int i, int j, int m_Grid[200][200]);
+	void generateCities(int i, int j);
 
-	std::vector<Tile> environment;
-	std::vector<City> cities;
+	std::vector<Tile> m_Environment;
+	std::vector<City> m_Cities;
 
-	const int gridSize = 200;
-	int grid[200][200];
+	const int m_GridSize;
+	int m_Grid[200][200];
+	sf::Texture m_cityTexture;
 };
