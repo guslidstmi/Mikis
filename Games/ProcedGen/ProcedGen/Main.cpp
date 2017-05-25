@@ -29,11 +29,11 @@ int main()
 		}
 		for (int i = 0; i < worldMap.getMap().size(); ++i)
 		{
-			mWindow.draw(worldMap.getMap()[i].m_getRect());
+			mWindow.draw(worldMap.getMap()[i].m_getCity());
 		}
 		for (int i = 0; i < worldMap.getCities().size(); ++i)
 		{
-			mWindow.draw(worldMap.getCities()[i].m_getRect());
+			mWindow.draw(worldMap.getCities()[i].m_getCity());
 		}
 		mWindow.display();
 	}

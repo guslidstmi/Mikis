@@ -25,10 +25,10 @@ std::vector<City>& Map::getCities()
 void Map::generateMap()
 {
 	Perlin perlin(m_GridSize, m_GridSize);
+	Perlin perlin2(m_GridSize, m_GridSize);
 
 	float x = 0.f, y = 0.f;
 	double noiseValue = 0.0;
-	int id = 0;
 	for (int i = 0; i < m_GridSize; ++i)
 	{
 		for (int j = 0; j < m_GridSize; ++j)
@@ -49,22 +49,39 @@ void Map::generateMap()
 				m_Grid[i][j] = 3;
 				m_Environment.push_back(Tile(x, y, Tile::Tiletype::BEACH));
 			}
-			else if(noiseValue < 0.59)
+			else if(noiseValue < 0.62)
 			{
 				m_Grid[i][j] = 4;
 				m_Environment.push_back(Tile(x, y, Tile::Tiletype::LAND));
 			}
-			else if (noiseValue < 0.65)
-			{
-				m_Grid[i][j] = 5;
-				m_Environment.push_back(Tile(x, y, Tile::Tiletype::FORREST));
-			}
-			else if (noiseValue > 0.65)
+			else if (noiseValue > 0.62)
 			{
 				m_Grid[i][j] = 6;
 				m_Environment.push_back(Tile(x, y, Tile::Tiletype::MOUNTAIN));
 			}
 			
+			y += 3.f;
+		}
+		y = 0.f;
+		x += 4.f;
+	}
+
+	x = 0.f, y = 0.f;
+	noiseValue = 0.0;
+	for (int i = 0; i < m_GridSize; ++i)
+	{
+		for (int j = 0; j < m_GridSize; ++j)
+		{
+			if (m_Grid[i][j] == 4)
+			{
+				noiseValue = perlin2.generatePerlin(i, j, 0.8, 12, 0.5);
+				if (noiseValue < 0.42 || noiseValue > 0.58)
+				{
+				m_Grid[i][j] = 5;
+				m_Environment.push_back(Tile(x, y, Tile::Tiletype::FORREST));
+				}
+			}
+
 			y += 3.f;
 		}
 		y = 0.f;
@@ -84,7 +101,7 @@ void Map::generateCities(int playerCityX, int playerCityY)
 	{
 		for (int j = 0; j < m_GridSize; j+=5)
 		{
-			if ((i < playerCityX - 20 || i > playerCityX + 20) && j < playerCityX - 20 || j > playerCityY + 20)
+			if ((i < playerCityX - 20 || i > playerCityX + 20) && (j < playerCityX - 20 || j > playerCityY + 20))
 			{
 				double num = distribution(generator);
 				if (num < 0.008 && m_Grid[i][j] == 4)

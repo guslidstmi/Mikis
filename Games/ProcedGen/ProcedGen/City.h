@@ -7,7 +7,7 @@ class City
 public :
 	City(const float x, const float y, const int id, const sf::Texture& cityTexture);
 	const int m_getCityId() const;
-	sf::Sprite& m_getRect();
+	sf::Sprite& m_getCity();
 
 private :
 	sf::Sprite m_City;

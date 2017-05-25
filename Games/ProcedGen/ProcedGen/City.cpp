@@ -23,7 +23,7 @@ const int City::m_getCityId() const
 	return m_Id;
 }
 
-sf::Sprite& City::m_getRect()
+sf::Sprite& City::m_getCity()
 {
 	return m_City;
 }
