@@ -14,7 +14,7 @@ public:
 	};
 
 	Tile(float x, float y, Tiletype colour);
-	sf::RectangleShape& m_getCity();
+	sf::RectangleShape& getTile();
 
 private:
 	sf::RectangleShape m_Rect;

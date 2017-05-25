@@ -14,7 +14,6 @@ public:
 
 private:
 	void generateMap();
-	bool nearbyCity(int i, int j, int m_Grid[200][200]);
 	void generateCities(int i, int j);
 
 	std::vector<Tile> m_Environment;

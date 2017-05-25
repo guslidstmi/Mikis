@@ -18,7 +18,7 @@ Tile::Tile(float x, float y, Tiletype colour) :
 	m_Rect.setPosition(x, y);
 }
 
-sf::RectangleShape & Tile::m_getCity()
+sf::RectangleShape & Tile::getTile()
 {
 	return m_Rect;
 }

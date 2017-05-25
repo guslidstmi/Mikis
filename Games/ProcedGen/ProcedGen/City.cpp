@@ -18,12 +18,12 @@ City::City(const float x, const float y, const int id, const sf::Texture& cityTe
 	}
 }
 
-const int City::m_getCityId() const
+const int City::getCityId() const
 {
 	return m_Id;
 }
 
-sf::Sprite& City::m_getCity()
+sf::Sprite& City::getCity()
 {
 	return m_City;
 }
