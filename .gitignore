@@ -167,3 +167,6 @@ $RECYCLE.BIN/
 /UnrealCourse/03_BuildingEscape/BuildingEscape/Content/StarterContent/HDRI
 *.VC.opendb
 */BuildingEscape/*.sdf
+
+# own files
+/C++ stuff/*
