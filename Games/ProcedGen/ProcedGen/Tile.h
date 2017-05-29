@@ -13,8 +13,8 @@ public:
 		MOUNTAIN
 	};
 
-	Tile(float x, float y, Tiletype colour);
-	sf::RectangleShape& getTile();
+	Tile(const float x, const float y, Tiletype colour);
+	const sf::RectangleShape& getTile()const ;
 
 private:
 	sf::RectangleShape m_Rect;

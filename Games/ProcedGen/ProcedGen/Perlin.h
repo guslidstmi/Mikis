@@ -10,14 +10,14 @@ class Perlin
 {
 public:
 
-	Perlin(int height, int width);
-	double generatePerlin(double x, double y, double z, int octaves, double persistence);
+	Perlin(const int height, const int width);
+	const double generatePerlin(const double x, const double y, const double z, const int octaves, const double persistence);
 
 private :
-	double noise(double x, double y, double z);
-	double fade(double t);
-	double interpolation(double t, double a, double b);
-	double gradient(int hash, double x, double y, double z);
+	const double noise(double x, double y, double z);
+	const double fade(const double t);
+	const double interpolation(const double t, const double a, const double b);
+	const double gradient(const int hash, const double x, const double y, const double z);
 
 	int m_height;
 	int m_width;

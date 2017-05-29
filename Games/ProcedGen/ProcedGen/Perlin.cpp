@@ -1,6 +1,6 @@
 #include "Perlin.h"
 
-Perlin::Perlin(int height, int width) :
+Perlin::Perlin(const int height, const int width) :
 	m_height{ height }
 	, m_width{ width }
 {
@@ -14,7 +14,7 @@ Perlin::Perlin(int height, int width) :
 	m_permutation.insert(m_permutation.end(), m_permutation.begin(), m_permutation.end());
 }
 
-double Perlin::noise(double x, double y, double z)
+const double Perlin::noise(double x, double y, double z)
 {
 	int newX = (int)floor(x) & 255;
 	int newY = (int)floor(y) & 255;
@@ -43,18 +43,18 @@ double Perlin::noise(double x, double y, double z)
 	return (result + 1.0)/2.0;
 }
 
-double Perlin::fade(double t) 
+const double Perlin::fade(const double t) 
 {
 	// f(t) = 6t^5 - 15t^4 + 10t^3
 	return t * t * t * (t * (t * 6 - 15) + 10); 
 }
 
-double Perlin::interpolation(double t, double a, double b) 
+const double Perlin::interpolation(const double t, const double a, const double b) 
 {
 	return a + t * (b - a);
 }
 
-double Perlin::gradient(int hash, double x, double y, double z) 
+const double Perlin::gradient(const int hash, const double x, const double y, const double z) 
 {
 	int h = hash & 15;
 	// Convert lower 4 bits of hash into 12 gradient directions
@@ -63,7 +63,7 @@ double Perlin::gradient(int hash, double x, double y, double z)
 	return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 }
 
-double Perlin::generatePerlin(double x, double y, double z, int octaves, double persistence) 
+const double Perlin::generatePerlin(const double x, const double y, const double z, const int octaves, const double persistence) 
 {
 	double total = 0.0;
 	double frequency = 0.007;

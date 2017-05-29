@@ -1,7 +1,7 @@
 #include "Tile.h"
 
 
-Tile::Tile(float x, float y, Tiletype colour) :
+Tile::Tile(const float x, const float y, Tiletype colour) :
 	m_Rect{}
 {
 	switch (colour)
@@ -18,7 +18,7 @@ Tile::Tile(float x, float y, Tiletype colour) :
 	m_Rect.setPosition(x, y);
 }
 
-sf::RectangleShape & Tile::getTile()
+const sf::RectangleShape & Tile::getTile() const 
 {
 	return m_Rect;
 }

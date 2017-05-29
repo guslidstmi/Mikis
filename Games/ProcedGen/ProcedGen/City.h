@@ -7,11 +7,11 @@ class City
 public :
 	City(const float x, const float y, const int id, const sf::Texture& cityTexture);
 	const int getCityId() const;
-	sf::Sprite& getCity();
+	const sf::Sprite& getCity() const;
 
 private :
 	sf::Sprite m_City;
-	sf::IntRect m_playerCity;
-	sf::IntRect m_neighbourCity;
+	const sf::IntRect m_playerCity;
+	const sf::IntRect m_neighbourCity;
 	const int m_Id;
 };

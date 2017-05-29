@@ -12,12 +12,12 @@ Map::Map() :
 	}
 }
 
-std::vector<Tile>& Map::getMap()
+const std::vector<Tile>& Map::getMap() const 
 {
 	return m_Environment;
 }
 
-std::vector<City>& Map::getCities()
+const std::vector<City>& Map::getCities() const
 {
 	return m_Cities;
 }
@@ -89,7 +89,7 @@ void Map::generateMap()
 	}
 }
 
-void Map::generateCities(int playerCityX, int playerCityY)
+void Map::generateCities(const int playerCityX, const int playerCityY)
 {
 	std::random_device rd;
 	std::default_random_engine generator(rd());
