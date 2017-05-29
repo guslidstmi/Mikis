@@ -9,7 +9,7 @@ Player::Player()
 {
 	paddle.setPosition(400, 550);
 	paddle.setOrigin(60.f / 2.f, 20.f /2.f);
-	popHearts();
+	spawnHearts();
 }
 
 const bool Player::update(const sf::Texture& texture)
@@ -60,7 +60,7 @@ void Player::reduceLives()
 	m_hearts.pop_back();
 }
 
-void Player::popHearts()
+void Player::spawnHearts()
 {
 	float x = 5.f;
 	for (int i = 0; i < 3; ++i)

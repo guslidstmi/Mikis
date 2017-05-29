@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
 namespace {
-	constexpr float OffSet = 10.f;
+	constexpr float OffSet = 5.f;
 };
 
 Bullet::Bullet(const float x, const float y) 

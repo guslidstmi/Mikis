@@ -56,19 +56,19 @@ World::State World::update(Interface& window)
 
 	m_gameOver = m_player.update(m_player_texture);
 	
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && m_timer > 15)
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && m_timer > 25)
 	{
 		m_timer = 0;
 		spawnBullet();	
 	}
-	if (m_bombtimer > 50)
+	if (m_bombtimer > 30)
 	{
 		m_enemyController.dropBomb();
 		m_bombtimer = 0;
 	}
-	checkCollision();
 	drawBullets(window);
 	drawBombs(window);
+	checkCollision();
 
 	return State::play;
 }

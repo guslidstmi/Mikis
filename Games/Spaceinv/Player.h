@@ -10,7 +10,7 @@ public:
 	Player();
 	const bool update(const sf::Texture& texture);
 	void reduceLives();
-	void popHearts();
+	void spawnHearts();
 	sf::Sprite paddle;
 
 	inline std::vector<Hearts>& Player::getHearts()	{ return m_hearts; }
