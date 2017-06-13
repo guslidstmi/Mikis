@@ -1,5 +1,4 @@
 #include "EnemyController.h"
-#include <iostream>
 #include <stdlib.h>
 
 namespace {
